@@ -4,18 +4,19 @@ function init_env{
     export PROJECT=`pwd`
 }
 
-function up_source_repo{
-    docker-compose -f $PROJECT/boot/docker-compose.yml start
+function up_repo{
+    bash $PROJECT/boot/repo/sit.sh
 }
 
 function init_node{
+    sudo ln -s $PROJECT/../packages /opt/
     bash $PROJECT/boot/apt/sit.sh
 }
 
 function main{
     init_env
     init_node
-    up_source_repo
+    up_repo
 }
 
 main

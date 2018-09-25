@@ -5,7 +5,7 @@ services:
       - "80:80"
     image: "nginx:latest"
     volumes:
-      - ./apt:/usr/share/nginx/html:ro
+      - /opt/packages:/usr/share/nginx/html:ro
       - ./conf.d:/etc/nginx/conf.d:ro
     command: /bin/bash -c "nginx -g 'daemon off;'"
 

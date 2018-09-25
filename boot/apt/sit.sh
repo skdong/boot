@@ -12,7 +12,7 @@ function deploy-boot-source(){
 function link-packages(){
     sudo mkdir -p /var/dire
     sudo rm /var/dire/boot
-    sudo ln -s $PROJECT/boot/apt/packages/ubuntu /var/dire/boot
+    sudo ln -s /opt/packages/ubuntu /var/dire/boot
 }
 
 function install-docker(){
