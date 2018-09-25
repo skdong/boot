@@ -12,6 +12,7 @@ services:
   nexus3:
     image: "sonatype/nexus3:latest"
     volumes:
-      - ./nexus-data:/nexus-data
+      - nexus3-data:/nexus-data
 
-
+volumes:
+  nexus3-data
