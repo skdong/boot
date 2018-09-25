@@ -8,3 +8,10 @@ services:
       - ./apt:/usr/share/nginx/html:ro
       - ./conf.d:/etc/nginx/conf.d:ro
     command: /bin/bash -c "nginx -g 'daemon off;'"
+
+  nexus3:
+    images: "sonatype/nexus3:latest"
+    volumes:
+      - /opt/nexus-data:/nexus-data
+
+
