@@ -10,8 +10,8 @@ services:
     command: /bin/bash -c "nginx -g 'daemon off;'"
 
   nexus3:
-    images: "sonatype/nexus3:latest"
+    image: "sonatype/nexus3:latest"
     volumes:
-      - /opt/nexus-data:/nexus-data
+      - ./nexus-data:/nexus-data
 
 
