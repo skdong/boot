@@ -5,16 +5,33 @@ services:
       - "80:80"
     image: "nginx:latest"
     volumes:
-      - /opt/packages:/usr/share/nginx/html:ro
+      - /opt/dire/packages:/usr/share/nginx/html:ro
       - ./conf.d:/etc/nginx/conf.d:ro
     command: /bin/bash -c "nginx -g 'daemon off;'"
+    restart: always
+
+  nexus3_init:
+    image: "sonatype/nexus3:latest"
+    user: root
+    volumes:
+      - /opt/dire/ssl:/opt/sonatype/nexus/etc/ssl
+      - /opt/dire/etc:/etc/dire
+      - ./nexus3/init_key.sh:/usr/bin/init_key.sh
+    command: bash /usr/bin/init_key.sh
 
   nexus3:
     image: "sonatype/nexus3:latest"
     ports:
       - "8081:8081"
+      - "443:9443"
     volumes:
       - nexus3-data:/nexus-data
+      - /opt/dire/ssl:/opt/sonatype/nexus/etc/ssl
+      - ./nexus3/nexus-default.properties:/opt/sonatype/nexus/etc/nexus-default.properties:ro
+      - ./nexus3/jetty-https.xml:/opt/sonatype/nexus/etc/jetty/jetty-https.xml:ro
+    depends_on:
+      - nexus3_init
+    restart: always
 
 volumes:
   nexus3-data:
