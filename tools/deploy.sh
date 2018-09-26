@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 function init_env{
-    export PROJECT=`pwd`
+    PROJECT=$(pwd)
 }
 
 function up_repo{

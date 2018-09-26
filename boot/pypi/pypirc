@@ -1,0 +1,7 @@
+[distuils]
+index-servers =
+	pypi
+[pypi]
+repository: http://repo.scourge.com/repository/pypi/
+username: admin
+password: admin123
