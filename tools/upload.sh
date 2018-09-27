@@ -9,7 +9,13 @@ function upload_rpm_packages{
     do
         curl  -v --user 'admin:admin123' --upload-file $package  http://$HOST/repository/yum/
     done
+}
 
+function upload_deb_packages{
+    for file in /opt/packages/ubuntu/debs/*
+    do
+        curl  -v --user 'admin:admin123' --upload-file $file  http://$HOST/repository/debs/
+    done
 }
 
 function push_docker_images{
