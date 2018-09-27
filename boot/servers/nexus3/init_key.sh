@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 NEXUS_DOMAIN=${HOST_NAME:-'localhost'}
-NEXUS_IP_ADDRESS=${HOST: -'127.0.0.1'}
+NEXUS_IP_ADDRESS=${HOST:-'127.0.0.1'}
 PASSWD=${KEYSTORE_PASS:-'nexus3'}
 
 cd /opt/sonatype/nexus/etc/ssl
