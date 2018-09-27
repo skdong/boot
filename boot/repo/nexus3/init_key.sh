@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
-NEXUS_DOMAIN=10.0.35.21
-NEXUS_IP_ADDRESS=10.0.35.21
-PASSWD=nexus3
+NEXUS_DOMAIN=${HOST_NAME:-'localhost'}
+NEXUS_IP_ADDRESS=${HOST: -'127.0.0.1'}
+PASSWD=${KEYSTORE_PASS:-'nexus3'}
 
 cd /opt/sonatype/nexus/etc/ssl
 if [[ ! -f keystore.jks ]]; then

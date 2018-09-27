@@ -31,7 +31,28 @@ services:
       - ./nexus3/jetty-https.xml:/opt/sonatype/nexus/etc/jetty/jetty-https.xml:ro
     depends_on:
       - nexus3_init
+    env_file: env
     restart: always
+
+  web:
+  image: 'gitlab/gitlab-ce:latest'
+  restart: always
+  hostname: 'gitlab.$DOMAIN'
+  environment:
+    GITLAB_OMNIBUS_CONFIG: |
+      external_url 'http://$HOST_NAME'
+      # Add any other gitlab.rb configuration here, each on its own line
+  ports:
+    - '8080:80'
+    - '8443:443'
+    - '8022:22'
+  volumes:
+    - 'gitlab-config:/etc/gitlab'
+    - 'gitlab-logs:/var/log/gitlab'
+    - 'gitlab-data:/var/opt/gitlab'
 
 volumes:
   nexus3-data:
+  gitlab-config:
+  gitlab-logs:
+  gitlab-data:
