@@ -1,15 +1,5 @@
 version: '3'
 services:
-  nginx:
-    ports:
-      - "80:80"
-    image: "nginx:latest"
-    volumes:
-      - /opt/dire/packages:/usr/share/nginx/html:ro
-      - ./conf.d:/etc/nginx/conf.d:ro
-    command: /bin/bash -c "nginx -g 'daemon off;'"
-    restart: always
-
   nexus3_init:
     image: "sonatype/nexus3:latest"
     user: root
@@ -18,11 +8,12 @@ services:
       - /opt/dire/etc:/etc/dire
       - ./nexus3/init_key.sh:/usr/bin/init_key.sh
     command: bash /usr/bin/init_key.sh
+    env_file: env
 
   nexus3:
     image: "sonatype/nexus3:latest"
     ports:
-      - "8081:8081"
+      - "80:8081"
       - "443:9443"
     volumes:
       - nexus3-data:/nexus-data
@@ -34,25 +25,33 @@ services:
     env_file: env
     restart: always
 
-  web:
-  image: 'gitlab/gitlab-ce:latest'
-  restart: always
-  hostname: 'gitlab.$DOMAIN'
-  environment:
-    GITLAB_OMNIBUS_CONFIG: |
-      external_url 'http://$HOST_NAME'
-      # Add any other gitlab.rb configuration here, each on its own line
-  ports:
-    - '8080:80'
-    - '8443:443'
-    - '8022:22'
-  volumes:
-    - 'gitlab-config:/etc/gitlab'
-    - 'gitlab-logs:/var/log/gitlab'
-    - 'gitlab-data:/var/opt/gitlab'
+  gitlab:
+    image: 'gitlab/gitlab-ce:latest'
+    restart: always
+    hostname: 'gitlab.$DOMAIN'
+    environment:
+      GITLAB_OMNIBUS_CONFIG: |
+        external_url 'http://$HOST_NAME'
+        # Add any other gitlab.rb configuration here, each on its own line
+    ports:
+      - '8080:80'
+      - '8443:443'
+      - '8022:22'
+    volumes:
+      - 'gitlab-config:/etc/gitlab'
+      - 'gitlab-logs:/var/log/gitlab'
+      - 'gitlab-data:/var/opt/gitlab'
+
+  gitlab_runner:
+    image: 'gitlab/gitlab-runner:latest'
+    restart: always
+    volumes:
+      - '/var/run/docker.sock:/var/run/docker.sock'
+      - 'gitlab-runner-config:/etc/gitlab-runner'
 
 volumes:
   nexus3-data:
   gitlab-config:
   gitlab-logs:
   gitlab-data:
+  gitlab-runner-config:
