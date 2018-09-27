@@ -32,22 +32,22 @@ function push_docker_images() {
     for image in /opt/packages/docker/*.tar
     do
         if [[ -f $image ]]; then
-            echo docker load -i $image
+            docker load -i $image
         fi
     done
     for list in /opt/packages/docker/image.d/*
     do
         for image in `cat $list`
         do
-            echo docker tag $image $HOST/$image
-            echo docker push $HOST/$image
+            docker tag $image $HOST/$image
+            docker push $HOST/$image
         done
     done
 }
 
-#upload_python_packages
-#upload_rpm_packages
-#upload_deb_packages
-#upload_certs
+upload_python_packages
+upload_rpm_packages
+upload_deb_packages
+upload_certs
 push_docker_images
 
