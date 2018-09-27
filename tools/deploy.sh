@@ -9,8 +9,8 @@ function init_node{
     bash $PROJECT/boot/apt/sit.sh
 }
 
-function up_repo{
-    bash $PROJECT/boot/repo/sit.sh
+function up_servers{
+    bash $PROJECT/boot/servers/sit.sh
 }
 
 function main{
