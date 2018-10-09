@@ -1,9 +1,8 @@
 #!/usr/bin/env bash
 
-MODULE=`dirname $0`
+MODULE=$(dirname $(readlink -f $0))
 
-docker run --run -it -v /opt/dire/packages/pypi:/opt/dire/packages/pytpi \
+docker run -it -v /opt/dire/packages/pypi:/opt/dire/packages/pypi \
  -v $MODULE/download.sh:/usr/bin/download.sh \
- -v $MODULE/requirements.d:/opt/dire/pypi/requiremnts.d \
- --rm \
+ -v $MODULE/requirements.d:/opt/dire/pypi/requirements.d \
  dire/package_tools /bin/bash /usr/bin/download.sh
