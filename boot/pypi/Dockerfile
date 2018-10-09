@@ -5,4 +5,4 @@ RUN apt-get update -y \
 
 RUN pip install twine
 
-COPY ./pypirc .pypirc
+COPY ./pypirc /root/.pypirc
