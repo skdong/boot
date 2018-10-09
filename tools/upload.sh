@@ -31,13 +31,13 @@ function upload_certs() {
 
 function push_docker_images() {
     docker login $HOST -u admin -p admin123
-    for image in /opt/packages/docker/*.tar
+    for image in /opt/dire/packages/docker/*.tar
     do
         if [[ -f $image ]]; then
             docker load -i $image
         fi
     done
-    for images in /opt/packages/docker/images.d/*
+    for images in /opt/dire/packages/docker/images.d/*
     do
         for image in `cat $images`
         do
