@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 
 function clean-sources(){
     sudo rm /etc/apt/sources.list.d/*
@@ -12,7 +13,7 @@ function deploy-boot-source(){
 function link-packages(){
     sudo mkdir -p /var/dire
     sudo rm /var/dire/boot
-    sudo ln -s /opt/packages/ubuntu /var/dire/boot
+    sudo ln -s /opt/dire/packages/ubuntu /var/dire/boot
 }
 
 function install-docker(){
