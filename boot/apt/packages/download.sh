@@ -2,9 +2,12 @@
 
 yum update -y
 
-for packages in /opt/dire/rpm/requirements.d/*
+for packages in /opt/dire/deb/requirements.d/*
 do
     yum install -y $(cat packages)
 done
 
-find /var/cache/yum/x86_64/ -name "*.rpm" -exec mv {} /tmp/packages \;
+find /var/cache/yum/x86_64/ -name "*.rpm" -exec mv {} /opt/dire/packages/debs \;
+
+/build.sh
+

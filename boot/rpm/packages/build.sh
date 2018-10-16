@@ -9,4 +9,4 @@ docker run -it -v --rm /opt/dire/packages/rpm:/opt/dire/packages/rpms \
  -v $MODULE/download.sh:/usr/bin/download.sh \
  -v $MODULE/requirements.d:/opt/dire/rpm/requirements.d \
  -v $MODULE/yum.repos.d/:/etc/yum.repos.d \
- dire/centos_tools /bin/bash /usr/bin/download.sh
+ dire/rpm_builder /bin/bash /usr/bin/download.sh

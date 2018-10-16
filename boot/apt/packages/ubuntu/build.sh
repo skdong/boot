@@ -14,4 +14,6 @@ function debs_packages(){
     gpg --clearsign --default-key 927BA0AC -o debs/InRelease debs/Release
 }
 
+cd /opt/dire/packages/
 debs_packages
+cd -
