@@ -2,11 +2,7 @@
 
 MODULE=$(dirname $(readlink -f $0))
 
-mkdir -p /opt/dire/packages/rpms
-rm -rf /opt/dire/packages/rpms/*
-
-docker run -it -v --rm /opt/dire/packages/rpm:/opt/dire/packages/rpms \
+docker run -it -d --rm -v /opt/dire/packages/rpms:/opt/dire/packages/rpms \
  -v $MODULE/download.sh:/usr/bin/download.sh \
- -v $MODULE/requirements.d:/opt/dire/rpm/requirements.d \
- -v $MODULE/yum.repos.d/:/etc/yum.repos.d \
+ -v $MODULE/requirements.d:/opt/dire/rpms/requirements.d \
  dire/rpm_builder /bin/bash /usr/bin/download.sh

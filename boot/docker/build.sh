@@ -2,7 +2,7 @@
 
 MODULE=$(dirname $(readlink -f $0))
 
-mkdir -p /opt/dire/package/docker/
+mkdir -p /opt/dire/packages/docker/
 mkdir -p /opt/dire/packages/docker/images.d/
 
 for images in $MODULE/images.d/*

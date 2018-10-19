@@ -10,7 +10,7 @@ function upload_python_packages() {
 function upload_rpm_packages() {
     for package in /opt/dire/packages/rpms/*
     do
-        curl  -v --user 'admin:admin123' --upload-file $package  http://$HOST/repository/yum/
+        curl  -v --user 'admin:admin123' --upload-file $package  http://$HOST/repository/yum-test/
     done
 }
 
@@ -34,7 +34,7 @@ function push_docker_images() {
     for image in /opt/dire/packages/docker/*.tar
     do
         if [[ -f $image ]]; then
-            docker load -i $image
+            sudo docker load -i $image
         fi
     done
     for images in /opt/dire/packages/docker/images.d/*
@@ -47,9 +47,9 @@ function push_docker_images() {
     done
 }
 
-upload_python_packages
+#upload_python_packages
 upload_rpm_packages
-upload_deb_packages
-upload_certs
-push_docker_images
+#upload_deb_packages
+#upload_certs
+#push_docker_images
 
