@@ -10,7 +10,7 @@ if [[ ! -f keystore.jks ]]; then
      -keypass ${PASSWD} -alias nexus -keyalg RSA -keysize 2048 \
      -validity 5000 -dname "CN=${NEXUS_DOMAIN}, \
      OU=Nexus, O=Nexus, L=Beijing, ST=Beijing, C=CN" \
-     -ext "SAN=IP:${NEXUS_IP_ADDRESS}" -ext "BC=ca:true" \
+     -ext "SAN=DNS:${NEXUS_DOMAIN}" -ext "BC=ca:true" \
      -storetype pkcs12
 fi
 

@@ -9,7 +9,8 @@ function init_env() {
 }
 
 function init_node() {
-    sudo ln -s $PROJECT/../packages /opt/
+    sudo mkdir -p /opt/dire
+    sudo cp -r $PROJECT/../packages /opt/dire/
     bash $PROJECT/boot/apt/sit.sh
 }
 

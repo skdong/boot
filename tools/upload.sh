@@ -30,7 +30,7 @@ function upload_certs() {
 }
 
 function push_docker_images() {
-    docker login $HOST -u admin -p admin123
+    docker login $HOST_NAME -u admin -p admin123
     for image in /opt/dire/packages/docker/*.tar
     do
         if [[ -f $image ]]; then
@@ -41,8 +41,8 @@ function push_docker_images() {
     do
         for image in `cat $images`
         do
-            docker tag $image $HOST/$image
-            docker push $HOST/$image
+            docker tag $image $HOST_NAME/$image
+            docker push $HOST_NAME/$image
         done
     done
 }

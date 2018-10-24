@@ -19,8 +19,8 @@ function up_servers() {
 }
 
 function deploy_docker_certs{
-    mkdir -p /etc/docker/certs.d/$HOST/
-    cp /opt/dire/ssl/keystore.crt /etc/docker/certs.d/$HOST/
+    mkdir -p /etc/docker/certs.d/$HOST_NAME/
+    cp /opt/dire/ssl/keystore.crt /etc/docker/certs.d/$HOST_NAME/
 }
 
 function sit() {

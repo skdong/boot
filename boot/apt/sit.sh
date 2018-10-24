@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+# copy packages to /opt/dire
+
 function clean-sources(){
     sudo rm /etc/apt/sources.list.d/*
     sudo truncate --size=0 /etc/apt/sources.list
@@ -17,11 +19,10 @@ function link-packages(){
 }
 
 function install-docker(){
-    sudo apt-get install docker-ce -y
+    sudo apt-get install docker-ce docker-compose  -y
 }
 
 function main(){
-    link-packages
     clean-sources
     deploy-boot-source
     install-docker
