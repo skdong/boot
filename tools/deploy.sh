@@ -20,7 +20,7 @@ function up_servers() {
 
 function main() {
     init_env
-    init_node
+    #init_node
     up_servers
 }
 

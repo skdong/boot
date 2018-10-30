@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+MODULE=$(dirname $(readlink -f $0))
+source $MODULE/bootrc
+
 function upload_python_packages() {
     docker run -it --rm \
                --add-host repo.scourge.com:$HOST \
@@ -10,7 +13,7 @@ function upload_python_packages() {
 function upload_rpm_packages() {
     for package in /opt/dire/packages/rpms/*
     do
-        curl  -v --user 'admin:admin123' --upload-file $package  http://$HOST/repository/yum-test/
+        curl  -v --user 'admin:admin123' --upload-file $package  http://$HOST/repository/yum/
     done
 }
 
@@ -48,8 +51,8 @@ function push_docker_images() {
 }
 
 #upload_python_packages
-upload_rpm_packages
+#upload_rpm_packages
 #upload_deb_packages
-#upload_certs
+upload_certs
 #push_docker_images
 
