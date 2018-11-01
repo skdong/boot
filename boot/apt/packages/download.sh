@@ -2,6 +2,8 @@
 
 apt-get update -y
 
+apt-get -y dist-upgrade
+
 apt-get install -y \
     apt-transport-https \
     ca-certificates \
