@@ -1,10 +1,20 @@
 #!/usr/bin/env bash
 
 MODULE=$(dirname $(readlink -f $0))
+name="dire_apt_builder"
 
-docker run -it -d --rm -v /opt/dire/packages/debs:/opt/dire/packages/debs \
- -v $MODULE/download.sh:/usr/bin/download.sh \
- -v $MODULE/requirements.d:/opt/dire/deb/requirements.d \
- -v $MODULE/sources.list.d/:/etc/apt/sources.list.d/ \
- -v $MODULE/ubuntu:/opt/dire/ubuntu \
- dire/deb_builder /bin/bash /usr/bin/download.sh
+function building_packages() {
+    docker run -it -d --rm -v /opt/dire/packages/debs:/opt/dire/packages/debs \
+     -v $MODULE/download.sh:/usr/bin/download.sh \
+     -v $MODULE/requirements.d:/opt/dire/deb/requirements.d \
+     -v $MODULE/sources.list.d/:/etc/apt/sources.list.d/ \
+     -v $MODULE/ubuntu:/opt/dire/ubuntu \
+     --name $name dire/deb_builder /bin/bash /usr/bin/download.sh
+ }
+
+docker inspect $name > /dev/null 2>&1
+if [ $? -ne 0 ]; then
+    building_packages
+else
+    echo "apt package is building"
+fi
