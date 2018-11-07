@@ -1,0 +1,13 @@
+k8s/pause-amd64:3.0
+k8s/k8s-helm:v2.9.1
+k8s/etcd:v3.2.4
+k8s/ctl:v1.6.3
+k8s/nginx:1.13
+k8s/tiller:v2.9.1
+k8s/hyperkube:v1.11.1
+k8s/nginx-ingress-controller:0.12.0
+k8s/defaultbackend:1.4
+k8s/node:v2.6.8
+k8s/coredns:1.1.0
+k8s/cni:v1.11.4
+k8s/kubernetes-dashboard-amd64:v1.8.3

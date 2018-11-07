@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+MODULE=$(dirname $(readlink -f $0))
+source $MODULE/bootrc
+
 function upload_python_packages() {
     docker run -it --rm \
                --add-host repo.scourge.com:$HOST \
@@ -7,10 +10,14 @@ function upload_python_packages() {
                dire/package_tools twine upload -r pypi /opt/dire/packages/pypi/*
 }
 
+function trim_hostname() {
+    docker images | grep -v none | egrep "[^/]*\.[^/]*/" | awk '{print "docker tag " $1 ":" $2 "  " $1 ":" $2}' | awk '{gsub("  [^/]*/", " " ,$0); print $0}' | bash
+}
+
 function upload_rpm_packages() {
     for package in /opt/dire/packages/rpms/*
     do
-        curl  -v --user 'admin:admin123' --upload-file $package  http://$HOST/repository/yum-test/
+        curl  -v --user 'admin:admin123' --upload-file $package  http://$HOST/repository/yum/
     done
 }
 
@@ -31,12 +38,13 @@ function upload_certs() {
 
 function push_docker_images() {
     docker login $HOST_NAME -u admin -p admin123
-    for image in /opt/dire/packages/docker/*.tar
-    do
-        if [[ -f $image ]]; then
-            sudo docker load -i $image
-        fi
-    done
+    #for image in /opt/dire/packages/docker/*.tar
+    #do
+    #    if [[ -f $image ]]; then
+    #        sudo docker load -i $image
+    #    fi
+    #done
+    trim_hostname
     for images in /opt/dire/packages/docker/images.d/*
     do
         for image in `cat $images`
@@ -48,8 +56,8 @@ function push_docker_images() {
 }
 
 #upload_python_packages
-upload_rpm_packages
+#upload_rpm_packages
 #upload_deb_packages
 #upload_certs
-#push_docker_images
+push_docker_images
 

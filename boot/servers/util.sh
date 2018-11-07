@@ -18,7 +18,7 @@ function up_servers() {
     docker-compose -f $MODULE_DIR/docker-compose.yml up -d
 }
 
-function deploy_docker_certs{
+function deploy_docker_certs() {
     mkdir -p /etc/docker/certs.d/$HOST_NAME/
     cp /opt/dire/ssl/keystore.crt /etc/docker/certs.d/$HOST_NAME/
     if [ `grep -c "$HOST_NAME" /etc/hosts` -eq '0' ]; then
