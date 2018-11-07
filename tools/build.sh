@@ -18,3 +18,6 @@ fuction build_packages() {
         fi
     done
 }
+
+build_docker_image
+build_packages
