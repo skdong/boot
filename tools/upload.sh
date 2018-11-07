@@ -44,7 +44,6 @@ function push_docker_images() {
             sudo docker load -i $image
         fi
     done
-    trim_hostname
     for images in /opt/dire/packages/docker/images.d/*
     do
         for image in `cat $images`
