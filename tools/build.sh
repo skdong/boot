@@ -11,7 +11,7 @@ function verify_permission() {
 }
 
 function build_docker_image() {
-    for module in $MODULES:
+    for module in $MODULES
     do
         if [ -f $BOOT/$module/build.sh ] ; then
             echo "buid $module image"
@@ -21,7 +21,7 @@ function build_docker_image() {
 }
 
 function build_packages() {
-    for module in $MODULES:
+    for module in $MODULES
     do
         if [ -f $BOOT/$module/packages/build.sh ] ; then
             echo "buid $module pakcages"
