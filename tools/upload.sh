@@ -38,12 +38,12 @@ function upload_certs() {
 
 function push_docker_images() {
     docker login $HOST_NAME -u admin -p admin123
-    #for image in /opt/dire/packages/docker/*.tar
-    #do
-    #    if [[ -f $image ]]; then
-    #        sudo docker load -i $image
-    #    fi
-    #done
+    for image in /opt/dire/packages/docker/*.tar
+    do
+        if [[ -f $image ]]; then
+            sudo docker load -i $image
+        fi
+    done
     trim_hostname
     for images in /opt/dire/packages/docker/images.d/*
     do
@@ -55,9 +55,33 @@ function push_docker_images() {
     done
 }
 
-#upload_python_packages
-#upload_rpm_packages
-#upload_deb_packages
-#upload_certs
-push_docker_images
+case "$1" in
+python)
+    upload_python_packages
+    ;;
+rpm)
+    upload_rpm_packages
+    ;;
+deb)
+    upload_deb_packages
+    ;;
+certs)
+    upload_certs
+    ;;
+docker)
+    push_docker_images
+    ;;
+all)
+    upload_python_packages
+    upload_rpm_packages
+    upload_deb_packages
+    upload_certs
+    push_docker_images
+    ;;
+*)
+    echo "Usage upload python rpm deb certs docker all"
+    exit 1
+    ;;
+esac
 
+exit 0
