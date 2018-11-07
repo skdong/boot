@@ -10,7 +10,7 @@ function build_docker_image() {
     done
 }
 
-fuction build_packages() {
+function build_packages() {
     for module in $MODULES:
     do
         if [ -f ../boot/$module/packages/build.sh ] ; then
