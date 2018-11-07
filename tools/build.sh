@@ -8,6 +8,7 @@ function verify_permission() {
     ls /root > /dev/null 2>&1
     if [ $? -ne 0 ]; then
         echo "this script need root permission"
+        exit 1
     fi
 }
 
