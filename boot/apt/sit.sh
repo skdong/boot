@@ -18,7 +18,7 @@ function install-docker(){
     sudo apt-get install docker-ce docker-compose  -y
 }
 
-functionn add-apt-key() {
+function add-apt-key() {
     sudo apt-key add $MODULE/packages/ubuntu/bjzdgt_ubuntu_2018.pub
 }
 
