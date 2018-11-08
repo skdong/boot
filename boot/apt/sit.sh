@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+MODULE=$(dirname $(readlink -f $0))
+
 # copy packages to /opt/dire
 
 function clean-sources(){
@@ -8,7 +10,7 @@ function clean-sources(){
 }
 
 function deploy-boot-source(){
-    sudo cp files/boot.list /etc/apt/sources.list.d
+    sudo cp $MODULE/files/boot.list /etc/apt/sources.list.d
     sudo apt-get update -y
 }
 
