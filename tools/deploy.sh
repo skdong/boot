@@ -1,16 +1,14 @@
 #!/usr/bin/env bash
 
 
-MODULE=`dirname $0`
+MODULE=$(dirname $(readlink -f $0))
 source $MODULE/bootrc
+PROJECT=$MODULE/..
 
 function init_env() {
-    PROJECT=$(pwd)
 }
 
 function init_node() {
-    sudo mkdir -p /opt/dire
-    sudo cp -r $PROJECT/../packages /opt/dire/
     bash $PROJECT/boot/apt/sit.sh
 }
 
@@ -20,7 +18,7 @@ function up_servers() {
 
 function main() {
     init_env
-    #init_node
+    init_node
     up_servers
 }
 
