@@ -5,9 +5,6 @@ MODULE=$(dirname $(readlink -f $0))
 source $MODULE/bootrc
 PROJECT=$MODULE/..
 
-function init_env() {
-}
-
 function init_node() {
     bash $PROJECT/boot/apt/sit.sh
 }
@@ -17,7 +14,6 @@ function up_servers() {
 }
 
 function main() {
-    init_env
     init_node
     up_servers
 }
