@@ -19,6 +19,13 @@ add-apt-repository \
 
 apt-get -y update
 
+cd  /opt/dire/packages/debs
+for package in $(cat /opt/dire/ubuntu/base)
+do
+    apt-get download $package
+done
+cd -
+
 for packages in /opt/dire/deb/requirements.d/*
 do
     for package in $(cat $packages)
