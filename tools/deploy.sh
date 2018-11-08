@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 
+set -e
 
 MODULE=$(dirname $(readlink -f $0))
 source $MODULE/bootrc

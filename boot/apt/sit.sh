@@ -18,6 +18,17 @@ function install-docker(){
     sudo apt-get install docker-ce docker-compose  -y
 }
 
+function load-docker-images(){
+    for package in /opt/dire/packages/docker/*tar
+    do
+        sudo docker load -i $package
+    done
+}
+
+function install-util-package(){
+    sudo apt-get install -y python-pip
+}
+
 function add-apt-key() {
     sudo apt-key add $MODULE/packages/ubuntu/bjzdgt_ubuntu_2018.pub
 }
@@ -27,6 +38,7 @@ function main(){
     add-apt-key
     deploy-boot-source
     install-docker
+    load-docker-images
 }
 
 main
