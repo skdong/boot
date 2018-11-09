@@ -7,7 +7,7 @@ MODULE=$(dirname $(readlink -f $0))
 # copy packages to /opt/dire
 
 function clean-sources(){
-    sudo rm /etc/apt/sources.list.d/*
+    sudo rm -rf /etc/apt/sources.list.d/*
     sudo truncate --size=0 /etc/apt/sources.list
 }
 
