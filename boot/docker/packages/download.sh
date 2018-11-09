@@ -4,8 +4,9 @@ MODULE=$(dirname $(readlink -f $0))
 
 function pull_image() {
     docker pull $1
-    if [[ $1 == *.*/* ]] ; then
-        docker tag $1 $(echo $1 | 's/^[^/]*\.[^/]*\///g' )
+    if [[ $1 != $(echo $1 | sed 's/^[^/]*\.[^/]*\///g' ) ]] ; then
+        docker tag $1 $(echo $1 | sed 's/^[^/]*\.[^/]*\///g' )
+        docker rmi $1
     fi
 }
 
@@ -19,7 +20,7 @@ function save_images() {
 function build_packages() {
     mkdir -p /opt/dire/packages/docker/
     mkdir -p /opt/dire/packages/docker/images.d/
-    for images in $MODULE/images.d/*
+    for images in /opt/dire/docker/images.d/*
     do
         if [[ -f $images ]]; then
             for image in $(cat $images)
@@ -29,7 +30,7 @@ function build_packages() {
             save_images $images
         fi
     done
-    docker image prune
+    docker image prune -f
     cd /opt/dire/packages/docker
     tar -zcvf docker.tar.gz /var/lib/docker
 
@@ -39,7 +40,7 @@ function trim_hostname() {
     docker images | grep -v none | egrep "[^/]*\.[^/]*/" | awk '{print "docker tag " $1 ":" $2 "  " $1 ":" $2}' | awk '{gsub("  [^/]*/", " " ,$0); print $0}' | bash
 }
 
-if [ ! -d /opt/dire/packages/docker ] ; then
+if [ ! -d /opt/dire/packages/docker/docker.tar.gz ] ; then
     build_packages
 else
     echo "docker package is build"
