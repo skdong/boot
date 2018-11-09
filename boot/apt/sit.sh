@@ -19,6 +19,9 @@ function deploy-boot-source(){
 
 function install-docker(){
     sudo apt-get install docker-ce docker-compose  -y
+    sudo systemctl stop docker
+    sudo tar -zxvf /opt/dire/packages/docker/docker.tar
+    sudo systemctl start docker
 }
 
 function load-docker-images(){
@@ -33,7 +36,7 @@ function install-util-packages(){
 }
 
 function dist-upgrade() {
-    sudo apt-get dist-upgrade
+    sudo apt-get -y dist-upgrade
 }
 
 function add-apt-key() {
@@ -44,6 +47,7 @@ function main(){
     clean-sources
     add-apt-key
     deploy-boot-source
+    dist-upgrade
     install-util-packages
     install-docker
     load-docker-images

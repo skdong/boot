@@ -3,3 +3,4 @@ gitlab/gitlab-ce:latest
 gitlab/gitlab-runner:latest
 ubuntu:16.04
 dire/package_tools:latest
+docker:dind
