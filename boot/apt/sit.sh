@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -e
+
 MODULE=$(dirname $(readlink -f $0))
 
 # copy packages to /opt/dire
@@ -29,6 +31,10 @@ function install-util-packages(){
     sudo apt-get install -y python-pip
 }
 
+function dist-upgrade() {
+    sudo apt-get dist-upgrade
+}
+
 function add-apt-key() {
     sudo apt-key add $MODULE/packages/ubuntu/bjzdgt_ubuntu_2018.pub
 }
@@ -37,8 +43,8 @@ function main(){
     clean-sources
     add-apt-key
     deploy-boot-source
-    install-docker
     install-util-packages
+    install-docker
     load-docker-images
 }
 
