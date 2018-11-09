@@ -10,7 +10,7 @@ function building_packages(){
      -v /etc/docker/certs.d/:/etc/docker/certs.d/ \
      -v /etc/hosts:/etc/hosts \
      --name $name docker:dind
-    docker exec -it -uroot /bin/sh /usr/bin/download.sh
+    docker exec -it -uroot $name /bin/sh /usr/bin/download.sh
     docker rm -f $name
  }
 
