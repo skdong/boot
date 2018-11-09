@@ -25,7 +25,7 @@ function load-docker-images(){
     done
 }
 
-function install-util-package(){
+function install-util-packages(){
     sudo apt-get install -y python-pip
 }
 
@@ -38,6 +38,7 @@ function main(){
     add-apt-key
     deploy-boot-source
     install-docker
+    install-util-packages
     load-docker-images
 }
 
