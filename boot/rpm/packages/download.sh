@@ -22,9 +22,9 @@ function download_packages() {
     rm -rf /opt/dire/packages/rpms
 }
 
-if [[ -f /opt/dire/packages/rpms/over ]] ; then
+if [[ -f /opt/dire/packages/rpms_over ]] ; then
     download_packages
-    touch /opt/dire/packages/rpms/over
+    touch /opt/dire/packages/rpms_over
 else
     echo "deb is built"
 fi

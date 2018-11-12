@@ -39,9 +39,9 @@ function trim_hostname() {
     docker images | grep -v none | egrep "[^/]*\.[^/]*/" | awk '{print "docker tag " $1 ":" $2 "  " $1 ":" $2}' | awk '{gsub("  [^/]*/", " " ,$0); print $0}' | bash
 }
 
-if [ ! -f /opt/dire/packages/docker/over ] ; then
+if [[ ! -f /opt/dire/packages/docker_over ]] ; then
     build_packages
-    touch /opt/dire/packages/docker/over
+    touch /opt/dire/packages/docker_over
 else
     echo "docker package is build"
 fi

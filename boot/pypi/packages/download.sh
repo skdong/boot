@@ -10,8 +10,9 @@ function download_packages() {
     rm -rf /opt/dire/packages/pypi
 }
 
-if [[ ! -f /opt/dire/packages/pypi/over ]] ; then
+if [[ ! -f /opt/dire/packages/pypi_over ]] ; then
     download_packages
+    touch /opt/dire/packages/pypi_over
 else
     echo "pypi is built"
 fi

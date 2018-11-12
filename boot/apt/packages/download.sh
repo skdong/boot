@@ -44,10 +44,10 @@ function build_ubuntu_apt() {
     rm -rf /opt/dire/packages/debs
 }
 
-if [[ ! -f /opt/dire/packages/debs/over ]] ; then
+if [[ ! -f /opt/dire/packages/debs_over ]] ; then
     download_packate
     build_ubuntu_apt
-    touch /opt/dire/packages/debs/over
+    touch /opt/dire/packages/debs_over
 elese
     echo "packages is built"
 fi
