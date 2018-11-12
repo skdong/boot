@@ -6,12 +6,24 @@ MODULE=$(dirname $(readlink -f $0))
 source $MODULE/bootrc
 PROJECT=$MODULE/..
 
+function uncompress_project() {
+    if [[ -f $1 && ! -d $1 ]] ; then
+        tar -zxf $1.tar.gz
+        echo "uncompress $1 over"
+    else
+        if [[ ! -d $1 ]] ; then
+            echo "need $1 packages file"
+            exit 1
+        fi
+    fi
+
+}
+
 function uncompress() {
     cd /opt/dire/packages
-    tar -zxvf debs.tar.gz
-    tar -zxvf pypi.tar.gz
-    tar -zxvf rpms.tar.gz
-    echo "uncompress over"
+    uncompress_project debs
+    uncompress_project pypi
+    uncompress_project rpms
 }
 function init_node() {
     bash $PROJECT/boot/apt/sit.sh
