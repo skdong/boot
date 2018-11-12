@@ -6,21 +6,21 @@ MODULE=$(dirname $(readlink -f $0))
 
 # copy packages to /opt/dire
 
-function clean-sources(){
+function clean_sources(){
     sudo rm -rf /etc/apt/sources.list.d/*
     sudo truncate --size=0 /etc/apt/sources.list
 }
 
-function deploy-boot-source(){
+function deploy_boot_source(){
     sudo cp $MODULE/files/boot.list /etc/apt/sources.list.d
     sudo ps -ef | grep apt | grep -v grep | awk '{print "kill -9 "$2}' | sudo bash
     sudo apt-get update -y
 }
 
-function install-docker(){
+function install_docker(){
     sudo apt-get install docker-ce docker-compose  -y
     sudo systemctl stop docker
-    sudo rm /var/lib/docker
+    sudo rm -rf /var/lib/docker
     sudo tar -zxvf /opt/dire/packages/docker.tar -C /
     sudo systemctl start docker
 }
@@ -32,26 +32,25 @@ function load-docker-images(){
     done
 }
 
-function install-util-packages(){
+function install_util_packages(){
     sudo apt-get install -y python-pip
 }
 
-function dist-upgrade() {
+function dist_upgrade() {
     sudo apt-get -y dist-upgrade
 }
 
-function add-apt-key() {
+function add_apt_key() {
     sudo apt-key add $MODULE/packages/ubuntu/bjzdgt_ubuntu_2018.pub
 }
 
 function main(){
-    clean-sources
-    add-apt-key
-    deploy-boot-source
-    dist-upgrade
-    install-util-packages
-    install-docker
-    load-docker-images
+    clean_sources
+    add_apt_key
+    deploy_boot_source
+    dist_upgrade
+    install_util_packages
+    install_docker
 }
 
 main

@@ -4,7 +4,7 @@ MODULE=$(dirname $(readlink -f $0))
 name="dire_rpm_builder"
 
 function building_packages(){
-    docker run -it -d --rm -v /opt/dire/packages/rpms:/opt/dire/packages/rpms \
+    docker run -it -d --rm -v /opt/dire/packages:/opt/dire/packages \
      -v $MODULE/download.sh:/usr/bin/download.sh \
      -v $MODULE/requirements.d:/opt/dire/rpms/requirements.d \
      --name $name dire/rpm_builder /bin/bash /usr/bin/download.sh

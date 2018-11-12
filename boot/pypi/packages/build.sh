@@ -4,7 +4,7 @@ MODULE=$(dirname $(readlink -f $0))
 name="dire_pypi_builder"
 
 function building_packages() {
-    docker run -it -d --rm -v /opt/dire/packages/pypi:/opt/dire/packages/pypi \
+    docker run -it -d --rm -v /opt/dire/packages/:/opt/dire/packages/ \
      -v $MODULE/download.sh:/usr/bin/download.sh \
      -v $MODULE/requirements.d:/opt/dire/pypi/requirements.d \
      --name $name dire/pypi_builder /bin/bash /usr/bin/download.sh

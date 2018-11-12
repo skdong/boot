@@ -48,7 +48,7 @@ if [[ ! -f /opt/dire/packages/debs_over ]] ; then
     download_packate
     build_ubuntu_apt
     touch /opt/dire/packages/debs_over
-elese
+else
     echo "packages is built"
 fi
 
