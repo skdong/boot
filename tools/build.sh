@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
-${MODULES:="apt pypi rpm docker"}
-${CLEAN:="no"}
+MODULES=${MODULES:="apt pypi rpm docker"}
+CLEAN=${CLEAN:="no"}
 MODULE=$(dirname $(readlink -f $0))
 BOOT=$MODULE/../boot
 
