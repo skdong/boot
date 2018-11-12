@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
 
-
 MODULE=$(dirname $(readlink -f $0))
 name="dire_docker_builder"
 
@@ -13,7 +12,7 @@ function building_packages(){
      -v /etc/hosts:/etc/hosts \
      --name $name docker:dind
     docker exec -it -uroot $name /bin/sh /usr/bin/download.sh
-    docker stop $name
+    #docker stop $name
  }
 
 docker inspect $name > /dev/null 2>&1

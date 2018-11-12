@@ -14,7 +14,6 @@ function save_images() {
     cp $1  /opt/dire/packages/docker/images.d
     images=/opt/dire/packages/docker/images.d/$(basename $1)
     sed  -i 's/^[^/]*\.[^/]*\///g' $images
-    # docker save $(cat $images) -o /opt/dire/packages/docker/$(basename $1).tar
 }
 
 function build_packages() {
