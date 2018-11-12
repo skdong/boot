@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
 ${MODULES:="apt pypi rpm docker"}
+${CLEAN:="no"}
 MODULE=$(dirname $(readlink -f $0))
 BOOT=$MODULE/../boot
 
@@ -44,6 +45,14 @@ function build_packages() {
     done
 }
 
+function clean_env() {
+    rm -rf /opt/dire/packages
+    docker ps -a | grep 'dire_*_builder' | awk '{print "docker rm -f "$1}' | bash
+}
+
+if [[ "$CLEAN" == "yes" ]] ; then
+clean_env
+fi
 verify_permission
 build_docker_image
 build_packages
