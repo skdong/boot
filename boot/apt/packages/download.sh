@@ -31,7 +31,7 @@ function download_packate() {
     do
         for package in $(cat $packages)
         do
-            apt-get install -d -q -y $package
+            apt-get install -d -q -y $package > /dev/null 2>&1
         done
     done
 }
