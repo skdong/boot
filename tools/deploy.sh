@@ -7,7 +7,7 @@ source $MODULE/bootrc
 PROJECT=$MODULE/..
 
 function uncompress_project() {
-    if [[ -f $1 && ! -d $1 ]] ; then
+    if [[ -f $1.tar.gz ]] && [[ ! -d $1 ]] ; then
         tar -zxf $1.tar.gz
         echo "uncompress $1 over"
     else
@@ -15,8 +15,8 @@ function uncompress_project() {
             echo "need $1 packages file"
             exit 1
         fi
+        echo "$1 is already exit"
     fi
-
 }
 
 function uncompress() {
