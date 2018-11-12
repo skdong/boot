@@ -18,6 +18,7 @@ function deploy_boot_source(){
 
 function install_docker(){
     sudo apt-get install docker-ce docker-compose  -y
+}
 
 function setup_docker(){
     sudo systemctl stop docker
@@ -26,7 +27,7 @@ function setup_docker(){
     sudo systemctl start docker
 }
 
-function load-docker-images(){
+function load_docker_images(){
     for package in /opt/dire/packages/docker/*tar
     do
         sudo docker load -i $package
@@ -56,4 +57,3 @@ function main(){
 }
 
 main
-
