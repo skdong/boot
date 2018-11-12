@@ -11,17 +11,20 @@ function uncompress() {
     tar -zxvf debs.tar.gz
     tar -zxvf pypi.tar.gz
     tar -zxvf rpms.tar.gz
-    tar -zxvf docker.tar.gz
+    echo "uncompress over"
 }
 function init_node() {
     bash $PROJECT/boot/apt/sit.sh
+    echo "init over"
 }
 
 function up_servers() {
     bash $PROJECT/boot/servers/sit.sh
+    echo "up servers over"
 }
 
 function main() {
+    uncompress
     init_node
     up_servers
 }

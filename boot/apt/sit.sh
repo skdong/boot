@@ -13,7 +13,6 @@ function clean_sources(){
 
 function deploy_boot_source(){
     sudo cp $MODULE/files/boot.list /etc/apt/sources.list.d
-    sudo ps -ef | grep apt | grep -v grep | awk '{print "kill -9 "$2}' | sudo bash
     sudo apt-get update -y
 }
 
