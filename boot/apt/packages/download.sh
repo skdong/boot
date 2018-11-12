@@ -1,40 +1,54 @@
 #!/usr/bin/env bash
 
-apt-get update -y
+function download_packate() {
+    apt-get update -y
 
-apt-get -y dist-upgrade
+    apt-get -y dist-upgrade
 
-apt-get install -y \
-    apt-transport-https \
-    ca-certificates \
-    curl \
-    software-properties-common
+    apt-get install -y \
+        apt-transport-https \
+        ca-certificates \
+        curl \
+        software-properties-common
 
-curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add -
+    curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add -
 
-add-apt-repository \
-   "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
-   $(lsb_release -cs) \
-   stable"
+    add-apt-repository \
+       "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
+       $(lsb_release -cs) \
+       stable"
 
-apt-get -y update
+    apt-get -y update
 
-cd  /opt/dire/packages/debs
-for package in $(cat /opt/dire/ubuntu/base)
-do
-    apt-get download $package
-done
-cd -
-
-for packages in /opt/dire/deb/requirements.d/*
-do
-    for package in $(cat $packages)
+    cd  /opt/dire/packages/debs
+    for package in $(cat /opt/dire/ubuntu/base)
     do
-        apt-get install -d -q -y $package
+        apt-get download $package
     done
-done
+    cd -
 
-find /var/cache/apt/archives/ -name "*.deb" -exec mv {}  /opt/dire/packages/debs \;
+    for packages in /opt/dire/deb/requirements.d/*
+    do
+        for package in $(cat $packages)
+        do
+            apt-get install -d -q -y $package
+        done
+    done
+}
 
-bash /opt/dire/ubuntu/build.sh
+function build_ubuntu_apt() {
+    find /var/cache/apt/archives/ -name "*.deb" -exec mv {}  /opt/dire/packages/debs \;
+    bash /opt/dire/ubuntu/build.sh
+    cd /opt/dire/packages/
+    tar -zcf debs.tar.gz debs
+    rm -rf /opt/dire/packages/debs
+}
+
+if [[ ! -f /opt/dire/packages/debs/over ]] ; then
+    download_packate
+    build_ubuntu_apt
+    touch /opt/dire/packages/debs/over
+elese
+    echo "packages is built"
+fi
 

@@ -30,8 +30,8 @@ function build_packages() {
         fi
     done
     docker image prune -f
-    cd /opt/dire/packages/docker
-    tar -zcvf docker.tar.gz /var/lib/docker
+    cd /opt/dire/packages
+    tar -zcf docker.tar.gz /var/lib/docker
 
 }
 

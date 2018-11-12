@@ -12,13 +12,17 @@ function building_packages(){
      -v /etc/hosts:/etc/hosts \
      --name $name docker:dind
     docker exec -it -uroot $name /bin/sh /usr/bin/download.sh
-    #docker stop $name
+    while [ ! -f /opt/dire/pakcages/docker/over ]
+    do
+        sleep 20
+    done
+    docker stop $name
  }
 
 docker inspect $name > /dev/null 2>&1
 if [ $? -ne 0 ]; then
     set -e
-    building_packages
+    building_packages &
 else
     echo "docker package is building"
 fi
