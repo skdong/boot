@@ -33,6 +33,7 @@ function download_packate() {
         do
             apt-get install -d -q -y $package > /dev/null 2>&1
         done
+        echo "download $packages over"
     done
 }
 
