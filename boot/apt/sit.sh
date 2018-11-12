@@ -20,7 +20,8 @@ function deploy-boot-source(){
 function install-docker(){
     sudo apt-get install docker-ce docker-compose  -y
     sudo systemctl stop docker
-    sudo tar -zxvf /opt/dire/packages/docker/docker.tar
+    sudo rm /var/lib/docker
+    sudo tar -zxvf /opt/dire/packages/docker.tar -C /
     sudo systemctl start docker
 }
 
