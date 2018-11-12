@@ -1,6 +1,6 @@
-sonatype/nexus3:latest
-gitlab/gitlab-ce:latest
-gitlab/gitlab-runner:latest
-ubuntu:16.04
-dire/package_tools:latest
+deploy.mydomain.com/sonatype/nexus3:latest
+deploy.mydomain.com/gitlab/gitlab-ce:latest
+deploy.mydomain.com/gitlab/gitlab-runner:latest
+deploy.mydomain.com/ubuntu:16.04
+deploy.mydomain.com/dire/package_tools:latest
 docker:dind
