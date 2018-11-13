@@ -23,6 +23,7 @@ function download_packages() {
 }
 
 if [[ ! -f /opt/dire/packages/rpms_over ]] ; then
+    mkdir -p /opt/dire/packages/rpms
     download_packages
     touch /opt/dire/packages/rpms_over
 else

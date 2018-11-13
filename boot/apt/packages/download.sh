@@ -20,12 +20,12 @@ function download_packate() {
 
     apt-get -y update
 
+    mkdir -p /opt/dire/packages/debs
     cd  /opt/dire/packages/debs
     for package in $(cat /opt/dire/ubuntu/base)
     do
         apt-get download $package
     done
-    cd -
 
     for packages in /opt/dire/deb/requirements.d/*
     do

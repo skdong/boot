@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
 function download_packages() {
+    mkdir -p /opt/dire/packages/pypi
     for requirements in /opt/dire/pypi/requirements.d/*
     do
         pip download -r $requirements -d /opt/dire/packages/pypi
