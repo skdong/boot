@@ -22,6 +22,7 @@ function uncompress_project() {
 }
 
 function uncompress() {
+    echo "uncompress packages"
     cd /opt/dire/packages
     uncompress_project debs
     uncompress_project pypi

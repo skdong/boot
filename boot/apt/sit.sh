@@ -23,7 +23,7 @@ function install_docker(){
 function setup_docker(){
     sudo systemctl stop docker
     sudo rm -rf /var/lib/docker
-    sudo tar -zxvf /opt/dire/packages/docker.tar -C /
+    sudo tar -zxvf /opt/dire/packages/docker.tar.gz -C /
     sudo systemctl start docker
 }
 
