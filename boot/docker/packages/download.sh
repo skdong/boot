@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
-local over='/opt/dire/packages/docker_over'
-local packages='/opt/dire/packages/docker.tar.gz'
+over='/opt/dire/packages/docker_over'
+packages='/opt/dire/packages/docker.tar.gz'
 
 MODULE=$(dirname $(readlink -f $0))
 
