@@ -35,11 +35,11 @@ function load_docker_images(){
 }
 
 function install_util_packages(){
-    sudo apt-get install -y python-pip
+    sudo apt-get install -y -q python-pip
 }
 
 function dist_upgrade() {
-    sudo apt-get -y dist-upgrade
+    sudo apt-get -y -q dist-upgrade
 }
 
 function add_apt_key() {
