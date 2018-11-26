@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+local over='/opt/dire/packages/docker_over'
+local packages='/opt/dire/packages/docker.tar.gz'
+
 MODULE=$(dirname $(readlink -f $0))
 
 function pull_image() {
@@ -39,7 +42,8 @@ function trim_hostname() {
     docker images | grep -v none | egrep "[^/]*\.[^/]*/" | awk '{print "docker tag " $1 ":" $2 "  " $1 ":" $2}' | awk '{gsub("  [^/]*/", " " ,$0); print $0}' | bash
 }
 
-if [[ ! -f /opt/dire/packages/docker_over ]] ; then
+if [[ ! -f $over || ! -f $packages ]] ; then
+    rm -rf /opt/dire/packages/docker
     build_packages
     touch /opt/dire/packages/docker_over
 else

@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
+local over='/opt/dire/packages/debs_over'
+local packages='/opt/dire/packages/debs.tar.gz'
 
-function download_packate() {
+function download_packages() {
     apt-get update -y
 
     apt-get -y dist-upgrade
@@ -27,9 +29,9 @@ function download_packate() {
         apt-get download $package
     done
 
-    for packages in /opt/dire/deb/requirements.d/*
+    for list in /opt/dire/deb/requirements.d/*
     do
-        for package in $(cat $packages)
+        for package in $(cat $list)
         do
             apt-get install -d -q -y $package > /dev/null 2>&1
         done
@@ -45,8 +47,10 @@ function build_ubuntu_apt() {
     rm -rf /opt/dire/packages/debs
 }
 
-if [[ ! -f /opt/dire/packages/debs_over ]] ; then
-    download_packate
+if [[ ! -f $over || ! -f $packages ]] ; then
+    rm -f /opt/dire/packages/debs_over
+    rm -f /opt/dire/packages/debs.tar.gz
+    download_packages
     build_ubuntu_apt
     touch /opt/dire/packages/debs_over
 else

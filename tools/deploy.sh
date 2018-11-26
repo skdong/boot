@@ -3,8 +3,10 @@
 set -e
 
 MODULE=$(dirname $(readlink -f $0))
-source $MODULE/bootrc
 PROJECT=$MODULE/..
+source $MODULE/bootrc
+
+local enable_helm='yes'
 
 function uncompress_project() {
     if [[ -f $1.tar.gz ]] && [[ ! -d $1 ]] ; then
@@ -24,6 +26,9 @@ function uncompress() {
     uncompress_project debs
     uncompress_project pypi
     uncompress_project rpms
+    if [[ $enable_helm == 'yes' ]] ; then
+        uncompress_project helm
+    fi
 }
 function init_node() {
     bash $PROJECT/boot/apt/sit.sh

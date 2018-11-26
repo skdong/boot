@@ -36,6 +36,15 @@ function upload_certs() {
     done
 }
 
+function upload_helm() {
+    if [[ -d /opt/dire/packages/helm ]]; then
+        for file in /opt/dire/packages/helm/*
+        do
+            curl  -v --user 'admin:admin123' --upload-file $file  http://$HOST/repository/helm/
+        done
+    fi
+}
+
 function push_docker_images() {
     docker login $HOST_NAME -u admin -p admin123
     for image in /opt/dire/packages/docker/*.tar
@@ -67,6 +76,9 @@ deb)
 certs)
     upload_certs
     ;;
+helm)
+    upload_helm
+    ;;
 docker)
     push_docker_images
     ;;
@@ -75,6 +87,7 @@ all)
     upload_rpm_packages
     upload_deb_packages
     upload_certs
+    upload_helm
     push_docker_images
     ;;
 *)
