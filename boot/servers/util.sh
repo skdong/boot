@@ -1,9 +1,11 @@
 #!/usr/bin/env bash
 
-MODULE_DIR=`dirname $0`
+#!/usr/bin/env bash
+
+MODULE=$(dirname $(readlink -f $0))
 
 function set_env() {
-    cat<<EOF > $MODULE_DIR/env
+    cat<<EOF > $MODULE/env
 HOST_NAME=$HOST_NAME
 HOST=$HOST
 PASSWD=$KEYSTORE_PASS
@@ -15,7 +17,10 @@ function clean_env() {
 }
 
 function up_servers() {
-    docker-compose -f $MODULE_DIR/docker-compose.yml up -d
+    mkdir /opt/dire/ssl -p
+    docker swarm init
+    docker stack deploy --compose-file docker-compose.yml dire
+    #docker-compose -f $MODULE/docker-compose.yml up -d
 }
 
 function deploy_docker_certs() {
@@ -27,7 +32,7 @@ function deploy_docker_certs() {
     fi
 }
 
-function sit() {
+function site() {
     set_env
     up_servers
     deploy_docker_certs
