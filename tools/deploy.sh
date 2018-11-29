@@ -6,7 +6,7 @@ MODULE=$(dirname $(readlink -f $0))
 PROJECT=$MODULE/..
 source $MODULE/bootrc
 
-ENABLE_HELM=${ENABLE_HELM:-'yes'}
+ENABLE_HELM=${ENABLE_HELM:-'no'}
 
 function uncompress_project() {
     if [[ -f $1.tar.gz ]] && [[ ! -d $1 ]] ; then
