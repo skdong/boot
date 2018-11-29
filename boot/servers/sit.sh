@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
-MODULE=`dirname $0`
+MODULE=$(dirname $(readlink -f $0))
 
 source $MODULE/util.sh
 
-sit
+site
