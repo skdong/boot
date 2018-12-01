@@ -1,4 +1,4 @@
-version: '3'
+version: '2.1'
 services:
   nexus3_init:
     image: "sonatype/nexus3:latest"
@@ -24,30 +24,33 @@ services:
       - nexus3_init
     env_file: env
     restart: always
+    healthcheck:
+      test: ['CMD', 'curl', '-f', 'http://localhost:8081']
+      interval: 1m30s
+      timeout: 10s
+      retries: 3
 
   gitlab:
     image: 'gitlab/gitlab-ce:latest'
     restart: always
-    hostname: 'gitlab.$DOMAIN'
+    hostname: 'gitlab$DOMAIN'
     environment:
       GITLAB_OMNIBUS_CONFIG: |
-        external_url 'http://$HOST_NAME'
-        # Add any other gitlab.rb configuration here, each on its own line
-    ports:
-      - '8080:80'
-      - '8443:443'
-      - '8022:22'
+        external_url 'http://gitlab$DOMAIN'
+    networks:
+      dire_net:
+        ipv4_address: $GIT_HOST
     volumes:
       - 'gitlab-config:/etc/gitlab'
       - 'gitlab-logs:/var/log/gitlab'
       - 'gitlab-data:/var/opt/gitlab'
 
-  gitlab_runner:
-    image: 'gitlab/gitlab-runner:latest'
-    restart: always
-    volumes:
-      - '/var/run/docker.sock:/var/run/docker.sock'
-      - 'gitlab-runner-config:/etc/gitlab-runner'
+#  gitlab_runner:
+#    image: 'gitlab/gitlab-runner:latest'
+#    restart: always
+#    volumes:
+#      - '/var/run/docker.sock:/var/run/docker.sock'
+#      - 'gitlab-runner-config:/etc/gitlab-runner'
 
 volumes:
   nexus3-data:
@@ -55,3 +58,17 @@ volumes:
   gitlab-logs:
   gitlab-data:
   gitlab-runner-config:
+
+networks:
+  dire_net:
+    external:
+      name: $DIRE_NET
+#    driver: macvlan
+#    ipam:
+#      driver: default
+#      config:
+#      - subnet: $DIRE_SUBNET
+#        gateway: $DIRE_GATWAY
+#      options:
+#        parent: $DIRE_INTERFACE
+#       ip-range: $DIRE_IP_RANGE

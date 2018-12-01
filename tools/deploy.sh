@@ -6,7 +6,7 @@ MODULE=$(dirname $(readlink -f $0))
 PROJECT=$MODULE/..
 source $MODULE/bootrc
 
-local enable_helm='yes'
+ENABLE_HELM=${ENABLE_HELM:-'no'}
 
 function uncompress_project() {
     if [[ -f $1.tar.gz ]] && [[ ! -d $1 ]] ; then
@@ -22,11 +22,12 @@ function uncompress_project() {
 }
 
 function uncompress() {
+    echo "uncompress packages"
     cd /opt/dire/packages
     uncompress_project debs
     uncompress_project pypi
     uncompress_project rpms
-    if [[ $enable_helm == 'yes' ]] ; then
+    if [[ $ENABLE_HELM == 'yes' ]] ; then
         uncompress_project helm
     fi
 }
@@ -41,8 +42,8 @@ function up_servers() {
 }
 
 function main() {
-    uncompress
-    init_node
+    #uncompress
+    #init_node
     up_servers
 }
 

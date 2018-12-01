@@ -29,6 +29,8 @@ function upload_deb_packages() {
 }
 
 function upload_certs() {
+    mkdir -p /opt/dire/packages/certs/
+    cp ../boot/apt/packages/ubuntu/bjzdgt_ubuntu_2018.pub /opt/dire/packages/certs/
     cp /opt/dire/ssl/keystore.crt  /opt/dire/packages/certs/
     for file in /opt/dire/packages/certs/*
     do

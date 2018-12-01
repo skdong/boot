@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
-local over='/opt/dire/packages/debs_over'
-local packages='/opt/dire/packages/debs.tar.gz'
+over='/opt/dire/packages/debs_over'
+packages='/opt/dire/packages/debs.tar.gz'
 
 function download_packages() {
     apt-get update -y
