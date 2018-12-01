@@ -42,8 +42,8 @@ function up_servers() {
 }
 
 function main() {
-    #uncompress
-    #init_node
+    uncompress
+    init_node
     up_servers
 }
 

@@ -19,6 +19,7 @@ function verify_network() {
 }
 
 function create_network() {
+    ip link set $DIRE_INTERFACE up
     docker network create -d macvlan  \
       --ip-range=$DIRE_IP_RANGE  \
       --subnet=$DIRE_SUBNET  \
