@@ -17,7 +17,7 @@ function deploy_boot_source(){
 }
 
 function install_docker(){
-    sudo apt-get install docker-ce docker-compose  -y
+    sudo apt-get install docker-ce -y
 }
 
 function setup_docker(){
