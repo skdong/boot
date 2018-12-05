@@ -7,43 +7,55 @@ MODULE=$(dirname $(readlink -f $0))
 # copy packages to /opt/dire
 
 function clean_sources(){
-    sudo rm -rf /etc/apt/sources.list.d/*
-    sudo truncate --size=0 /etc/apt/sources.list
+    rm -rf /etc/apt/sources.list.d/*
+    truncate --size=0 /etc/apt/sources.list
 }
 
 function deploy_boot_source(){
-    sudo cp $MODULE/files/boot.list /etc/apt/sources.list.d
-    sudo apt-get update -y
+    cp $MODULE/files/boot.list /etc/apt/sources.list.d
+    apt-get update -y
 }
 
 function install_docker(){
-    sudo apt-get install docker-ce -y
+    apt-get install docker-ce -y
 }
 
 function setup_docker(){
-    sudo systemctl stop docker
-    sudo rm -rf /var/lib/docker
-    sudo tar -zxvf /opt/dire/packages/docker.tar.gz -C /
-    sudo systemctl start docker
+    systemctl stop docker
+    rm -rf /var/lib/docker
+    tar -zxvf /opt/dire/packages/docker.tar.gz -C /
+    systemctl start docker
+    usermod -a -G docker $SUDO_USER
 }
 
 function load_docker_images(){
     for package in /opt/dire/packages/docker/*tar
     do
-        sudo docker load -i $package
+        docker load -i $package
     done
 }
 
 function install_util_packages(){
-    sudo apt-get install -y -q python-pip
+    apt-get install -y -q python-pip
 }
 
 function dist_upgrade() {
-    sudo apt-get -y -q dist-upgrade
+    apt-get -y -q dist-upgrade
 }
 
 function add_apt_key() {
-    sudo apt-key add $MODULE/packages/ubuntu/bjzdgt_ubuntu_2018.pub
+    apt-key add $MODULE/packages/ubuntu/bjzdgt_ubuntu_2018.pub
+}
+
+function setup_pip() {
+    mkdir $SUDO_USER/.pip
+    cat << EOF > $SUDO_USER/.pip/pip.conf
+[global]
+index-url = http://$HOST/repository/pypi/simple/
+[install]
+trusted-host = $HOST
+EOF
+    chown $SUDO_USER.$SUDO_USER -R $SUDO_USER/.pip
 }
 
 function main(){

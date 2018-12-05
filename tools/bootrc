@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
 
-export HOST='10.0.35.121'
+export HOST='1.0.41.21'
 export DOMAIN='.dire.com'
 export HOST_NAME='deploy.dire.com'
 export KEYSTORE_PASS='nexus3'
-export GIT_HOST='10.0.35.200'
-export DIRE_IP_RANGE='10.0.35.200/29'
-export DIRE_SUBNET='10.0.35.0/24'
-export DIRE_GATWAY='10.0.35.254'
+export GIT_HOST='1.0.41.200'
+export DIRE_IP_RANGE='1.0.41.200/29'
+export DIRE_SUBNET='1.0.41.0/24'
+export DIRE_GATWAY='1.0.41.254'
 export DIRE_INTERFACE='ens192'
 export DIRE_NET='dire_net'
