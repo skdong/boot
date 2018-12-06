@@ -12,7 +12,7 @@ index-url = http://$HOST/repository/pypi/simple/
 trusted-host = $HOST
 EOF
 
-docker build -t dire/tool_box:latest $MODULE
+docker build -t dire/base:latest $MODULE
 
 rm bjzdgt_ubuntu_2018.pub steam_source.list pip.conf
 
