@@ -1,6 +1,0 @@
-HOST_NAME=deploy.dire.com
-HOST=10.0.35.121
-PASSWD=nexus3
-DIRE_NET=dire_net
-DOMAIN=.dire.com
-GIT_HOST=10.0.35.200

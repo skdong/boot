@@ -2,6 +2,6 @@
 MODULE=$(dirname $(readlink -f $0))
 cd $MODULE
 
-docker build -t dire/ansible_tools:latest $MODULE
+docker build -t dire/toolbox:latest $MODULE
 
 cd -
