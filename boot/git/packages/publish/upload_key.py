@@ -41,7 +41,7 @@ def upload_key(url, token):
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("-t", "--token", help="gitlab access token")
-    parser.add_argument("-u", "--url", help="gitlab url")
+    parser.add_argument("-l", "--url", help="gitlab url")
     args = parser.parse_args()
     upload_key(args.url, args.token)
 

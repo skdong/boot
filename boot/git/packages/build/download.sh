@@ -1,9 +1,11 @@
 #!/usr/bin/env bash
-basedir='/op/dire/packages/'
+basedir='/opt/dire/'
 type='git'
-over_flag=${basedir}${type}'_over'
-worke_space=${basedir}${type}
-sources_package=${basedir}${type}'.tar.gz'
+
+package_dir=${basedir}'packages/'
+over_flag=${package_dir}${type}'_over'
+worke_space=${package_dir}${type}
+sources_package=${package_dir}${type}'.tar.gz'
 packages_list=${basedir}${type}'/requirements.d/'
 
 
@@ -19,7 +21,7 @@ function download_packages() {
 }
 
 function compress_sources(){
-    cd ${basedir}
+    cd ${package_dir}
     tar -zcf ${type}.tar.gz ${type}
     rm -rf ${worke_space}
 }
@@ -39,7 +41,7 @@ function set_build_over {
     md5sum ${sources_package} > ${over_flag}
 }
 
-if [[ ! -f ${over_flag} ]] ; then
+if [[ ! -f ${over_flag} || ! -f ${sources_package} ]] ; then
     init_work_space
     download_packages
     compress_sources

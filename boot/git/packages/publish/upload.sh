@@ -1,11 +1,13 @@
 #!/usr/bin/env bash
-URL='http://'${GIT_HOST}/
+BOOT_GROUP=${BOOT_GROUP:='dire'}
+URL='http://'${GIT_HOST}'/'
 python /opt/dire/publish/create_keypair.py
-python /opt/dire/publish/upload_key.py -u $URL -t $TOKEN
-python /opt/dire/publish/create_projects.py -u $URL -t $TOKE
-for project in '/opt/dire/packages/*'
+python /opt/dire/publish/upload_key.py -l $URL -t $TOKEN
+python /opt/dire/publish/create_group.py -l $URL -t $TOKEN -g ${BOOT_GROUP}
+for project in /opt/dire/packages/git/*
 do
     cd ${project}
-    git add remote dire git@${GIT_HOST}:dire/$(basename ${project}).git
-    git push
+    git remote remove dire
+    git remote add dire git@${GIT_HOST}:${BOOT_GROUP}/$(basename ${project}).git
+    git push dire
 done
