@@ -1,29 +1,26 @@
 #!/usr/bin/env bash
-basedir='/opt/dire/'
-type='git'
+
+basedir='/opt/dire/packages/'
+type='helm'
 
 set -e
 
-package_dir=${basedir}'packages/'
-over_flag=${package_dir}${type}'_over'
-worke_space=${package_dir}${type}
-sources_package=${package_dir}${type}'.tar.gz'
+over_flag=${basedir}${type}'_over'
+worke_space=${basedir}${type}
+sources_package=${basedir}${type}'.tar.gz'
 packages_list=${basedir}${type}'/requirements.d/'
 
-
 function download_packages() {
+    MODULE=$(dirname $(readlink -f $0))
     cd ${worke_space}
-    for packages in ${packages_list}'*'
+    for file in $(cat ${MODULE}/files)
     do
-        for repo in $(cat $packages)
-        do
-            git clone ${repo}
-        done
+        curl -L -O $file
     done
 }
 
 function compress_sources(){
-    cd ${package_dir}
+    cd ${basedir}
     tar -zcf ${type}.tar.gz ${type}
     rm -rf ${worke_space}
 }

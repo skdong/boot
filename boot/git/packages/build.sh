@@ -9,7 +9,7 @@ function building_packages(){
      -v $MODULE/requirements.d:/opt/dire/git/requirements.d \
      -v $MODULE/keypair/id_rsa:/root/.ssh/id_rsa \
      -v $MODULE/keypair/id_rsa.pub:/root/.ssh/id_rsa.pub \
-     --name $name iaiong/git_tool /bin/bash /usr/bin/download.sh
+     --name $name aions/git_tool /bin/bash /usr/bin/download.sh
  }
 
 docker inspect $name > /dev/null 2>&1

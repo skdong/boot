@@ -1,10 +1,6 @@
 from gitlab import Gitlab
 import argparse
 
-boot_group = 'dire'
-boot_projects = ['steam', 'germ', 'boot', 'kolla-ansible', 'kubespray']
-
-
 class GitlabProxy(object):
     def __init__(self, url, token):
         self._gitlab = Gitlab(url,
@@ -99,16 +95,21 @@ class CodesManager(object):
         self.git_proxy.delete_ssh_key(key.id)
 
 
-def init_dire(url, token):
+def init_dire(url, token, group):
     manager = CodesManager(url, token)
-    manager.get_or_create_group(boot_group)
-    for project in boot_projects:
-        manager.get_or_create_project(project, boot_group)
+    projects = manager.get_group_projects(group)
+    project_names = ' '.join([project.name for project in projects])
+    with open('/opt/dire/projects.ini', 'w') as fp:
+        fp.write(project_names)
 
 
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("-t", "--token", help="gitlab access token")
-    parser.add_argument("-u", "--url", help="gitlab url")
+    parser.add_argument("-l", "--url", help="gitlab url")
+    parser.add_argument("-g", "--group", help="dire group")
     args = parser.parse_args()
-    init_dire(args.url, args.token)
+    init_dire(args.url, args.token, args.group)
+
+if __name__ == '__main__':
+    main()

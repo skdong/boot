@@ -3,6 +3,14 @@
 MODULE=$(dirname $(readlink -f $0))
 name="dire_docker_builder"
 
+basedir='/opt/dire/'
+type='docker'
+
+package_dir=${basedir}'packages/'
+over_flag=${package_dir}${type}'_over'
+worke_space=${package_dir}${type}
+sources_package=${package_dir}${type}'.tar.gz'
+
 function building_packages(){
     docker run  -d --rm --privileged \
      -v /opt/dire/packages:/opt/dire/packages \
@@ -12,7 +20,7 @@ function building_packages(){
      -v /etc/hosts:/etc/hosts \
      --name $name docker:dind
     docker exec  -u root $name /bin/sh /usr/bin/download.sh
-    while [ ! -f /opt/dire/pakcages/docker/over ]
+    while [[ ! -f ${over_flag} || ! -f ${sources_package} ]]
     do
         sleep 20
     done
@@ -26,3 +34,6 @@ if [ $? -ne 0 ]; then
 else
     echo "docker package is building"
 fi
+
+
+

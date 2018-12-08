@@ -2,7 +2,7 @@ import os
 import argparse
 from gitlab import Gitlab
 
-boot_title = 'boot'
+boot_title = 'deploy'
 
 
 def get_pub_key():

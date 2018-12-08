@@ -1,7 +1,10 @@
 #!/usr/bin/env bash
 
 MODULE=$(dirname $(readlink -f $0))
+WORK_SPACE=${MODULE}'/..'
 source $MODULE/bootrc
+
+package_dir='/opt/dire/packages/'
 
 function upload_python_packages() {
     docker run -it --rm \
@@ -15,23 +18,23 @@ function trim_hostname() {
 }
 
 function upload_rpm_packages() {
-    for package in /opt/dire/packages/rpms/*
+    for package in ${package_dir}rpms/*
     do
         curl  -v --user 'admin:admin123' --upload-file $package  http://$HOST/repository/yum/
     done
 }
 
 function upload_deb_packages() {
-    for file in /opt/dire/packages/debs/*
+    for file in ${package_dir}debs/*
     do
         curl  -v --user 'admin:admin123' --upload-file $file  http://$HOST/repository/debs/
     done
 }
 
 function upload_certs() {
-    mkdir -p /opt/dire/packages/certs/
+    mkdir -p ${package_dir}/certs/
     cp -f $MODULE/../boot/apt/packages/ubuntu/bjzdgt_ubuntu_2018.pub /opt/dire/packages/certs/
-    cp -f /opt/dire/ssl/keystore.crt  /opt/dire/packages/certs/
+    cp -f /opt/dire/ssl/keystore.crt  ${package_dir}certs/
     for file in /opt/dire/packages/certs/*
     do
         curl  -v --user 'admin:admin123' --upload-file $file  http://$HOST/repository/certs/
@@ -39,8 +42,11 @@ function upload_certs() {
 }
 
 function upload_helm() {
-    if [[ -d /opt/dire/packages/helm ]]; then
-        for file in /opt/dire/packages/helm/*
+    if [[ -d ${package_dir}helm || -f ${package_dir}helm.tar.gz ]]; then
+        if [[ ! -d /opt/dire/packages/helm ]]; then
+            tar -zxf ${package_dir}helm.tar.gz -C ${package_dir}
+        fi
+        for file in ${package_dir}helm/*
         do
             curl  -v --user 'admin:admin123' --upload-file $file  http://$HOST/repository/helm/
         done
@@ -49,13 +55,13 @@ function upload_helm() {
 
 function push_docker_images() {
     docker login $HOST_NAME -u admin -p admin123
-    for image in /opt/dire/packages/docker/*.tar
+    for image in ${package_dir}docker/*.tar
     do
         if [[ -f $image ]]; then
             sudo docker load -i $image
         fi
     done
-    for images in /opt/dire/packages/docker/images.d/*
+    for images in ${package_dir}docker/images.d/*
     do
         for image in `cat $images`
         do
@@ -63,6 +69,10 @@ function push_docker_images() {
             docker push $HOST_NAME/$image
         done
     done
+}
+
+function upload_git_projects() {
+    bash ${WORK_SPACE}/boot/git/packages/publish.sh
 }
 
 case "$1" in
