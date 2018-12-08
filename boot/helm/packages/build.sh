@@ -2,6 +2,9 @@
 
 basedir='/opt/dire/packages/'
 type='helm'
+
+set -e
+
 over_flag=${basedir}${type}'_over'
 worke_space=${basedir}${type}
 sources_package=${basedir}${type}'.tar.gz'

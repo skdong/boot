@@ -2,6 +2,8 @@
 basedir='/opt/dire/'
 type='git'
 
+set -e
+
 package_dir=${basedir}'packages/'
 over_flag=${package_dir}${type}'_over'
 worke_space=${package_dir}${type}

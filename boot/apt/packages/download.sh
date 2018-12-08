@@ -1,11 +1,19 @@
 #!/usr/bin/env bash
-over='/opt/dire/packages/debs_over'
-packages='/opt/dire/packages/debs.tar.gz'
+basedir='/opt/dire/'
+type='debs'
+
+set -e
+
+package_dir=${basedir}'packages/'
+over_flag=${package_dir}${type}'_over'
+worke_space=${package_dir}${type}
+sources_package=${package_dir}${type}'.tar.gz'
+packages_list=${basedir}${type}'/requirements.d/'
 
 function download_packages() {
     apt-get update -y
 
-    apt-get -y dist-upgrade
+    apt-get -y --download-only dist-upgrade
 
     apt-get install -y \
         apt-transport-https \
@@ -33,7 +41,7 @@ function download_packages() {
     do
         for package in $(cat $list)
         do
-            apt-get install -d -q -y $package > /dev/null 2>&1
+            apt-get install --download-only -d -q -y $package > /dev/null 2>&1
         done
         echo "download $packages over"
     done
@@ -42,18 +50,35 @@ function download_packages() {
 function build_ubuntu_apt() {
     find /var/cache/apt/archives/ -name "*.deb" -exec mv {}  /opt/dire/packages/debs \;
     bash /opt/dire/ubuntu/build.sh
-    cd /opt/dire/packages/
-    tar -zcf debs.tar.gz debs
-    rm -rf /opt/dire/packages/debs
 }
 
-if [[ ! -f $over || ! -f $packages ]] ; then
-    rm -f /opt/dire/packages/debs_over
-    rm -f /opt/dire/packages/debs.tar.gz
+function compress_sources(){
+    cd ${package_dir}
+    tar -zcf ${type}.tar.gz ${type}
+    rm -rf ${worke_space}
+}
+
+function clean() {
+    rm -rf ${over_flag}
+    rm -rf ${worke_space}
+    rm -rf ${sources_package}
+}
+
+function init_work_space() {
+    clean
+    mkdir -p ${worke_space}
+}
+
+function set_build_over {
+    md5sum ${sources_package} > ${over_flag}
+}
+
+if [[ ! -f ${over_flag} || ! -f ${sources_package} ]] ; then
+    init_work_space
     download_packages
     build_ubuntu_apt
-    touch /opt/dire/packages/debs_over
+    compress_sources
+    set_build_over
 else
-    echo "packages is built"
+    echo ${type}" is built"
 fi
-

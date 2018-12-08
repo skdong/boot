@@ -1,6 +1,16 @@
 #!/usr/bin/env bash
 
-over='/opt/dire/packages/docker_over'
+basedir='/opt/dire/'
+type='docker'
+
+set -e
+
+package_dir=${basedir}'packages/'
+over_flag=${package_dir}${type}'_over'
+worke_space=${package_dir}${type}
+sources_package=${package_dir}${type}'.tar.gz'
+packages_list=${basedir}${type}'/requirements.d/'
+
 packages='/opt/dire/packages/docker.tar.gz'
 
 MODULE=$(dirname $(readlink -f $0))
@@ -19,8 +29,7 @@ function save_images() {
     sed  -i 's/^[^/]*\.[^/]*\///g' $images
 }
 
-function build_packages() {
-    mkdir -p /opt/dire/packages/docker/
+function download_packages() {
     mkdir -p /opt/dire/packages/docker/images.d/
     for images in /opt/dire/docker/images.d/*
     do
@@ -42,10 +51,25 @@ function trim_hostname() {
     docker images | grep -v none | egrep "[^/]*\.[^/]*/" | awk '{print "docker tag " $1 ":" $2 "  " $1 ":" $2}' | awk '{gsub("  [^/]*/", " " ,$0); print $0}' | bash
 }
 
-if [[ ! -f $over || ! -f $packages ]] ; then
-    rm -rf /opt/dire/packages/docker
-    build_packages
-    touch /opt/dire/packages/docker_over
+function clean() {
+    rm -rf ${over_flag}
+    rm -rf ${worke_space}
+    rm -rf ${sources_package}
+}
+
+function init_work_space() {
+    clean
+    mkdir -p ${worke_space}
+}
+
+function set_build_over {
+    md5sum ${sources_package} > ${over_flag}
+}
+
+if [[ ! -f ${over_flag} || ! -f ${sources_package} ]] ; then
+    init_work_space
+    download_packages
+    set_build_over
 else
-    echo "docker package is build"
+    echo ${type}" is built"
 fi
