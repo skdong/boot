@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-MODULES=${MODULES:="apt pypi rpm docker git"}
+MODULES=${MODULES:="apt pypi rpm docker git helm"}
 CLEAN=${CLEAN:="no"}
 MODULE=$(dirname $(readlink -f $0))
 BOOT=$MODULE/../boot
