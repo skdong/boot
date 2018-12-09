@@ -4,6 +4,25 @@ MODULES=${MODULES:="apt pypi rpm docker git helm"}
 CLEAN=${CLEAN:="no"}
 MODULE=$(dirname $(readlink -f $0))
 BOOT=$MODULE/../boot
+PACKAGES_DIR='/opt/dire/packages/'
+
+function clean_container() {
+    for modlue in $MODULES
+    do
+        if [[ -f ${PACKAGES_DIR}${modlue}_over && -f ${PACKAGES_DIR}${modlue}.tar.gz ]] ; then
+            docker rm -f dire_${modlue}_builder
+        fi
+    done
+}
+
+function verify_packages() {
+    for modlue in $MODULES
+    do
+        if [[ ! -f ${PACKAGES_DIR}${modlue}_over || ! -f ${PACKAGES_DIR}${modlue}.tar.gz ]] ; then
+            echo ${modlue}"is not buid over, please buid again !!!"
+        fi
+    done
+}
 
 function verify_permission() {
     ls /root > /dev/null 2>&1
@@ -57,3 +76,5 @@ verify_permission
 build_docker_image
 build_packages
 wait_building_over
+verify_packages
+clean_container

@@ -24,9 +24,9 @@ function uncompress_project() {
 function uncompress() {
     echo "uncompress packages"
     cd /opt/dire/packages
-    uncompress_project debs
+    uncompress_project deb
     uncompress_project pypi
-    uncompress_project rpms
+    uncompress_project rpm
     if [[ $ENABLE_HELM == 'yes' ]] ; then
         uncompress_project helm
     fi

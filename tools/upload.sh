@@ -18,14 +18,14 @@ function trim_hostname() {
 }
 
 function upload_rpm_packages() {
-    for package in ${package_dir}rpms/*
+    for package in ${package_dir}rpm/*
     do
         curl  -v --user 'admin:admin123' --upload-file $package  http://$HOST/repository/yum/
     done
 }
 
 function upload_deb_packages() {
-    for file in ${package_dir}debs/*
+    for file in ${package_dir}deb/*
     do
         curl  -v --user 'admin:admin123' --upload-file $file  http://$HOST/repository/debs/
     done

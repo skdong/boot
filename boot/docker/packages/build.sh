@@ -12,7 +12,7 @@ worke_space=${package_dir}${type}
 sources_package=${package_dir}${type}'.tar.gz'
 
 function building_packages(){
-    docker run  -d --rm --privileged \
+    docker run  -d  --privileged \
      -v /opt/dire/packages:/opt/dire/packages \
      -v $MODULE/download.sh:/usr/bin/download.sh \
      -v $MODULE/images.d:/opt/dire/docker/images.d \
@@ -27,7 +27,7 @@ function building_packages(){
     docker stop $name
  }
 
-docker inspect $name > /dev/null 2>&1
+docker ps | grep  $name
 if [ $? -ne 0 ]; then
     set -e
     building_packages &

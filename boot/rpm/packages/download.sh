@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 basedir='/opt/dire/'
-type='rpms'
+type='rpm'
 
 set -e
 
@@ -24,10 +24,12 @@ function download_packages() {
 
     for packages in /opt/dire/rpms/requirements.d/*
     do
-        yum install -y $(cat $packages)
+        if [[ -s $packages ]] ; then
+            yum install  --downloadonly -y $(cat $packages)
+        fi
     done
 
-    find /var/cache/yum/x86_64/ -name "*.rpm" -exec mv {} /opt/dire/packages/rpms \;
+    find /var/cache/yum/x86_64/ -name "*.rpm" -exec mv {} /opt/dire/packages/rpm \;
 }
 
 function compress_sources(){

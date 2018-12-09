@@ -11,10 +11,6 @@ worke_space=${package_dir}${type}
 sources_package=${package_dir}${type}'.tar.gz'
 packages_list=${basedir}${type}'/requirements.d/'
 
-packages='/opt/dire/packages/docker.tar.gz'
-
-MODULE=$(dirname $(readlink -f $0))
-
 function pull_image() {
     docker pull $1
     if [[ $1 != $(echo $1 | sed 's/^[^/]*\.[^/]*\///g' ) ]] ; then

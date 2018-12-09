@@ -4,7 +4,6 @@ curl
 software-properties-common
 docker-ce
 libffi-dev
-libnetfilter-conntrack
 libssl-dev
 dnsmasq
 dnsmasq-base

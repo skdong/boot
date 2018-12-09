@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 basedir='/opt/dire/'
-type='debs'
+type='deb'
 
 set -e
 
@@ -30,8 +30,7 @@ function download_packages() {
 
     apt-get -y update
 
-    mkdir -p /opt/dire/packages/debs
-    cd  /opt/dire/packages/debs
+    cd  ${worke_space}
     for package in $(cat /opt/dire/ubuntu/base)
     do
         apt-get download $package
@@ -41,14 +40,14 @@ function download_packages() {
     do
         for package in $(cat $list)
         do
-            apt-get install --download-only -d -q -y $package > /dev/null 2>&1
+            apt-get install --download-only -d -q -y $package 
         done
-        echo "download $packages over"
+        echo "download $list over"
     done
 }
 
 function build_ubuntu_apt() {
-    find /var/cache/apt/archives/ -name "*.deb" -exec mv {}  /opt/dire/packages/debs \;
+    find /var/cache/apt/archives/ -name "*.deb" -exec mv {}  ${worke_space} \;
     bash /opt/dire/ubuntu/build.sh
 }
 
