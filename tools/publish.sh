@@ -4,6 +4,4 @@ MODULE=$(dirname $(readlink -f $0))
 PROJECT=$MODULE/..
 source $MODULE/bootrc
 
-bash $PROJECT/boot/git/packages/publish.sh
-
 bash $PROJECT/docker/build.sh

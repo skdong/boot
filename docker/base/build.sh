@@ -4,7 +4,7 @@ MODULE=$(dirname $(readlink -f $0))
 cd $MODULE
 
 curl -O http://$HOST_NAME/repository/certs/bjzdgt_ubuntu_2018.pub
-echo "deb http://$HOST/repository debs/" > steam_source.list
+echo "deb http://$HOST/repository deb/" > steam_source.list
 cat << EOF > pip.conf
 [global]
 index-url = http://$HOST/repository/pypi/simple/

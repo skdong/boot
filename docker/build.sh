@@ -2,9 +2,10 @@
 
 MODULE=$(dirname $(readlink -f $0))
 
-IMAGES="ansible "
-for image in $IMAGES
+for image in ${MODULE}/*
 do
-    echo "build $image image"
-    bash $MODULE/$image/build.sh
+    if [[ -d $image ]] ; then
+        echo "build $image image"
+        bash $image/build.sh
+    fi
 done

@@ -12,4 +12,3 @@ PyYAML>=3.12 # MIT
 netaddr>=0.7.18 # BSD
 cryptography>=2.1 # BSD/Apache-2.0
 python-gitlab
-gittle

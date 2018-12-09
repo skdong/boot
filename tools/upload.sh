@@ -27,7 +27,7 @@ function upload_rpm_packages() {
 function upload_deb_packages() {
     for file in ${package_dir}deb/*
     do
-        curl  -v --user 'admin:admin123' --upload-file $file  http://$HOST/repository/debs/
+        curl  -v --user 'admin:admin123' --upload-file $file  http://$HOST/repository/deb/
     done
 }
 
@@ -94,6 +94,9 @@ helm)
 docker)
     push_docker_images
     ;;
+git)
+    upload_git_projects
+    ;;
 all)
     upload_python_packages
     upload_rpm_packages
@@ -101,6 +104,7 @@ all)
     upload_certs
     upload_helm
     push_docker_images
+    upload_git_projects
     ;;
 *)
     echo "Usage upload python rpm deb certs docker all"
