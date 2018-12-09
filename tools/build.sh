@@ -10,7 +10,7 @@ function clean_container() {
     for modlue in $MODULES
     do
         if [[ -f ${PACKAGES_DIR}${modlue}_over && -f ${PACKAGES_DIR}${modlue}.tar.gz ]] ; then
-            docker rm -f dire_${modlue}_builder
+            docker rm -f dire_${modlue}_builder > /dev/null 2>&1
         fi
     done
 }
@@ -19,7 +19,7 @@ function verify_packages() {
     for modlue in $MODULES
     do
         if [[ ! -f ${PACKAGES_DIR}${modlue}_over || ! -f ${PACKAGES_DIR}${modlue}.tar.gz ]] ; then
-            echo ${modlue}"is not buid over, please buid again !!!"
+            echo ${modlue}" is not buid over, please buid again !!!"
         fi
     done
 }

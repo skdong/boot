@@ -19,9 +19,9 @@ function building_packages(){
      -v /etc/docker/certs.d/:/etc/docker/certs.d/ \
      -v /etc/hosts:/etc/hosts \
      --name $name docker:dind
-    docker exec  -u root $name /bin/sh /usr/bin/download.sh
     while [[ ! -f ${over_flag} || ! -f ${sources_package} ]]
     do
+        docker exec  -u root $name /bin/sh /usr/bin/download.sh
         sleep 20
     done
     docker stop $name
