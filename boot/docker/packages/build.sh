@@ -29,7 +29,6 @@ function building_packages(){
 
 docker ps | grep  $name
 if [ $? -ne 0 ]; then
-    set -e
     building_packages &
 else
     echo "docker package is building"
