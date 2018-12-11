@@ -28,6 +28,7 @@ deploy.mydomain.com/kolla/ubuntu-binary-nova-api:queens
 deploy.mydomain.com/kolla/ubuntu-binary-nova-consoleauth:queens
 deploy.mydomain.com/kolla/ubuntu-binary-nova-conductor:queens
 deploy.mydomain.com/kolla/ubuntu-binary-nova-scheduler:queens
+deploy.mydomain.com/kolla/ubuntu-binary-nova-ssh:queens
 deploy.mydomain.com/kolla/ubuntu-binary-glance-api:queens
 deploy.mydomain.com/kolla/ubuntu-binary-glance-registry:queens
 deploy.mydomain.com/kolla/ubuntu-binary-collectd:queens
