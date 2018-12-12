@@ -57,3 +57,6 @@ deploy.mydomain.com/kolla/ubuntu-binary-chrony:queens
 deploy.mydomain.com/kolla/ubuntu-binary-mariadb:queens
 deploy.mydomain.com/kolla/ubuntu-binary-memcached:queens
 deploy.mydomain.com/kolla/ubuntu-binary-etcd:queens
+deploy.mydomain.com/kolla/centos-binary-gnocchi-api:queens
+deploy.mydomain.com/kolla/centos-binary-gnocchi-metricd:queens
+deploy.mydomain.com/kolla/centos-binary-gnocchi-statsd:queens
