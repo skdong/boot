@@ -1,7 +1,4 @@
 deploy.mydomain.com/kolla/ubuntu-binary-horizon:queens
-deploy.mydomain.com/kolla/ubuntu-binary-prometheus-cadvisor:rocky
-deploy.mydomain.com/kolla/ubuntu-binary-prometheus-memcached-exporter:rocky
-deploy.mydomain.com/kolla/ubuntu-binary-prometheus-alertmanager:rocky
 deploy.mydomain.com/kolla/ubuntu-binary-haproxy:queens
 deploy.mydomain.com/kolla/ubuntu-binary-ceph-mgr:queens
 deploy.mydomain.com/kolla/ubuntu-binary-grafana:queens
@@ -44,6 +41,13 @@ deploy.mydomain.com/kolla/ubuntu-binary-prometheus-node-exporter:queens
 deploy.mydomain.com/kolla/ubuntu-binary-prometheus-server:queens
 deploy.mydomain.com/kolla/ubuntu-binary-prometheus-haproxy-exporter:queens
 deploy.mydomain.com/kolla/ubuntu-binary-prometheus-mysqld-exporter:queens
+deploy.mydomain.com/kolla/ubuntu-binary-prometheus-libvirt-exporter:queens
+deploy.mydomain.com/kolla/ubuntu-binary-prometheus-openstack-exporter:queens
+deploy.mydomain.com/kolla/ubuntu-binary-prometheus-rabbit-exporter:queens
+deploy.mydomain.com/kolla/ubuntu-binary-prometheus-ceph-exporter:queens
+deploy.mydomain.com/kolla/ubuntu-binary-prometheus-cadvisor:rocky
+deploy.mydomain.com/kolla/ubuntu-binary-prometheus-memcached-exporter:rocky
+deploy.mydomain.com/kolla/ubuntu-binary-prometheus-alertmanager:rocky
 deploy.mydomain.com/kolla/ubuntu-binary-elasticsearch:queens
 deploy.mydomain.com/kolla/ubuntu-binary-rabbitmq:queens
 deploy.mydomain.com/kolla/ubuntu-binary-skydive-analyzer:queens
@@ -60,3 +64,10 @@ deploy.mydomain.com/kolla/ubuntu-binary-etcd:queens
 deploy.mydomain.com/kolla/centos-binary-gnocchi-api:queens
 deploy.mydomain.com/kolla/centos-binary-gnocchi-metricd:queens
 deploy.mydomain.com/kolla/centos-binary-gnocchi-statsd:queens
+deploy.mydomain.com/kolla/ubuntu-binary-ceilometer-central:queens
+deploy.mydomain.com/kolla/ubuntu-binary-ceilometer-compute:queens
+deploy.mydomain.com/kolla/ubuntu-binary-ceilometer-notification:queens
+deploy.mydomain.com/kolla/ubuntu-binary-aodh-api:queens
+deploy.mydomain.com/kolla/ubuntu-binary-aodh-evaluator:queens
+deploy.mydomain.com/kolla/ubuntu-binary-aodh-listener:queens
+deploy.mydomain.com/kolla/ubuntu-binary-aodh-notifier:queens
