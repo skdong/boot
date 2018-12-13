@@ -31,3 +31,4 @@ yum-utils
 tcpdump
 iftop
 man
+bash-completion
