@@ -26,6 +26,7 @@ function setup_docker(){
     tar -zxvf /opt/dire/packages/docker.tar.gz -C /
     systemctl start docker
     usermod -a -G docker $SUDO_USER
+    mkdir -p $HOME/.docker
     chown -R $SUDO_USER.$SUDO_USER $HOME/.docker
 }
 
