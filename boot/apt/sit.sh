@@ -20,14 +20,20 @@ function install_docker(){
     apt-get install docker-ce -y
 }
 
+function setup_sudo() {
+    if [[ -n SUDO_USER ]] ; then
+        usermod -a -G docker $SUDO_USER
+        mkdir -p $HOME/.docker
+        chown -R $SUDO_USER.$SUDO_USER $HOME/.docker
+    fi
+}
+
 function setup_docker(){
     systemctl stop docker
     rm -rf /var/lib/docker
     tar -zxvf /opt/dire/packages/docker.tar.gz -C /
     systemctl start docker
-    usermod -a -G docker $SUDO_USER
-    mkdir -p $HOME/.docker
-    chown -R $SUDO_USER.$SUDO_USER $HOME/.docker
+    setup_sudo
 }
 
 function load_docker_images(){
