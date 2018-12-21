@@ -19,7 +19,7 @@ function building_packages() {
      --name $name dire/deb_builder
      while [[ ! -f ${over_flag} || ! -f ${sources_package} ]]
      do
-        docker exec -u root $name /bin/sh /usr/bin/download.sh
+        docker exec -u root $name /bin/bash /usr/bin/download.sh
         sleep 20
      done
      docker stop $name
