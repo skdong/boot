@@ -25,7 +25,8 @@ function building_packages(){
         sleep 20
     done
     docker stop $name
- }
+    docker rm $name
+}
 
 docker ps | grep  $name
 if [ $? -ne 0 ]; then
