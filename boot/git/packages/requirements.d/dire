@@ -4,3 +4,4 @@ git@10.0.44.51:Nevermore/kolla-ansible.git
 git@10.0.44.51:Nevermore/kubespray.git
 git@10.0.44.51:Nevermore/Satellite.git
 git@10.0.44.51:Nevermore/helm.git
+git@10.0.44.51:Nevermore/purist.git
