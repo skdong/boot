@@ -28,7 +28,7 @@ function building_packages() {
 
 docker ps | grep $name
 if [ $? -ne 0 ]; then
-    building_packages
+    building_packages &
 else
     echo "apt package is building"
 fi

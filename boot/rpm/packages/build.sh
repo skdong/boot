@@ -27,7 +27,7 @@ function building_packages(){
 
 docker ps | grep  $name
 if [ $? -ne 0 ]; then
-    building_packages
+    building_packages &
 else
     echo "rpm package is building"
 fi
