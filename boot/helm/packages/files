@@ -2,3 +2,5 @@ http://10.0.35.21/repository/helm/ceph-0.1.0.tgz
 http://10.0.35.21/repository/helm/index.yaml
 http://10.0.35.21/repository/helm/kube-prometheus-0.0.105.tgz
 http://10.0.35.21/repository/helm/prometheus-operator-0.0.29.tgz
+http://10.0.35.21/repository/helm/gitlab-ce-0.2.2.tgz
+http://10.0.35.21/repository/helm/sonatype-nexus-1.15.0.tgz
