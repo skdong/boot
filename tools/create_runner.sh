@@ -6,7 +6,7 @@ source $MODULE/bootrc
 docker run -d --name gitlab-runner --restart always \
   -v /srv/gitlab-runner/config:/etc/gitlab-runner \
   -v /var/run/docker.sock:/var/run/docker.sock \
-  gitlab/gitlab-runner:latest
+  $HOST_NAME/gitlab/gitlab-runner:latest
   
 docker exec -it gitlab-runner gitlab-ci-multi-runner register -n \
   --url http://$GIT_HOST/ \
