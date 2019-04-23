@@ -11,3 +11,14 @@ deploy.mydomain.com/k8s/node:v2.6.8
 deploy.mydomain.com/k8s/coredns:1.1.0
 deploy.mydomain.com/k8s/cni:v1.11.4
 deploy.mydomain.com/k8s/kubernetes-dashboard-amd64:v1.8.3
+deploy.mydomain.com/k8s/alertmanager:v0.15.1
+deploy.mydomain.com/k8s/prometheus:v2.2.1
+deploy.mydomain.com/k8s/hyperkube:v1.7.6_coreos.0
+deploy.mydomain.com/k8s/prometheus-config-reloader:v0.20.0
+deploy.mydomain.com/k8s/configmap-reload:v0.0.1
+deploy.mydomain.com/k8s/prometheus-operator:v0.20.0
+deploy.mydomain.com/k8s/grafana:5.0.0
+deploy.mydomain.com/k8s/grafana-watcher:v0.0.8
+deploy.mydomain.com/k8s/kube-state-metrics:v1.2.0
+deploy.mydomain.com/k8s/addon-resizer:1.7
+deploy.mydomain.com/k8s/node-exporter:v0.15.2
