@@ -78,7 +78,9 @@ function clean_nexus_cert() {
 }
 
 function site() {
-    spawn_network
+    if [[ GITLAB_ENABLE == "True" ]] then:
+        spawn_network
+    fi
     set_env
     install_docker_compose
     up_servers

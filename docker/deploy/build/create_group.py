@@ -1,7 +1,6 @@
 from gitlab import Gitlab
 import argparse
 
-boot_projects = ['steam', 'germ', 'boot', 'kolla-ansible', 'kubespray']
 
 
 class GitlabProxy(object):
@@ -101,9 +100,6 @@ class CodesManager(object):
 def init_dire(url, token, group):
     manager = CodesManager(url, token)
     manager.get_or_create_group(group)
-    # gitlab will auto create project when push
-    #for project in boot_projects:
-    #    manager.get_or_create_project(project, boot_group)
 
 
 def main():
