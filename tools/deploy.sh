@@ -7,6 +7,7 @@ PROJECT=$MODULE/..
 source $MODULE/bootrc
 
 ENABLE_HELM=${ENABLE_HELM:-'no'}
+ENABLE_GITLAB=${ENABLE_GITLAB:-'no'}
 
 function uncompress_project() {
     if [[ -f $1.tar.gz ]] && [[ ! -d $1 ]] ; then
