@@ -11,6 +11,7 @@ ENABLE_GITLAB=${ENABLE_GITLAB:-'no'}
 
 USER=${USER:-"admin"}
 PASSWORD=${PASSWORD:-"admin123"}
+IDENTITY="$USER:$PASSWORD"
 
 function upload_python_packages() {
     docker run -it --rm \
@@ -27,14 +28,14 @@ function trim_hostname() {
 function upload_rpm_packages() {
     for package in ${package_dir}rpm/*
     do
-        curl  -v --user '$USER:$PASSWORD' --upload-file $package  http://$HOST/repository/yum/
+        curl  -v --user $IDENTITY --upload-file $package  http://$HOST/repository/yum/
     done
 }
 
 function upload_deb_packages() {
     for file in ${package_dir}deb/*
     do
-        curl  -v --user '$USER:$PASSWORD' --upload-file $file  http://$HOST/repository/deb/
+        curl  -v --user $IDENTITY --upload-file $file  http://$HOST/repository/deb/
     done
 }
 
@@ -44,7 +45,7 @@ function upload_certs() {
     cp -f /opt/dire/ssl/keystore.crt  ${package_dir}certs/
     for file in /opt/dire/packages/certs/*
     do
-        curl  -v --user '$USER:$PASSWORD' --upload-file $file  http://$HOST/repository/certs/
+        curl  -v --user $IDENTITY --upload-file $file  http://$HOST/repository/certs/
     done
 }
 
@@ -55,7 +56,7 @@ function upload_helm() {
         fi
         for file in ${package_dir}helm/*
         do
-            curl  -v --user '$USER:$PASSWORD' --upload-file $file  http://$HOST/repository/helm/
+            curl  -v --user $IDENTITY --upload-file $file  http://$HOST/repository/helm/
         done
     fi
 }
