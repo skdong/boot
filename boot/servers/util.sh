@@ -55,20 +55,26 @@ function up_servers() {
 
 function up_gitlab() {
     spawn_network
-    /usr/local/bin/docker-compose -f $MODULE/docker-compose.yml up -d gitlab
+    /usr/local/bin/docker-compose -f $MODULE/compose-gitlab.yml up -d
 }
 
 function up_nexus3() {
     mkdir /opt/dire/ssl -p
-    /usr/local/bin/docker-compose -f $MODULE/docker-compose.yml up -d nexus3
+    /usr/local/bin/docker-compose -f $MODULE/compose-nexus3.yml up -d
 }
 
 function down_servers_all() {
-    /usr/local/bin/docker-compose -f $MODULE/docker-compose.yml down -v
+    /usr/local/bin/docker-compose -f $MODULE/compose-nexus3.yml down -v
+    if [[ $ENABLE_GITLAB == "yes" ]] ; then
+        /usr/local/bin/docker-compose -f $MODULE/docker-compose.yml down -v
+    fi
 }
 
 function down_servers() {
-    /usr/local/bin/docker-compose -f $MODULE/docker-compose.yml down
+    /usr/local/bin/docker-compose -f $MODULE/compose-nexus3.yml down
+    if [[ $ENABLE_GITLAB == "yes" ]] ; then
+        /usr/local/bin/docker-compose -f $MODULE/docker-compose.yml down
+    fi
 }
 
 function deploy_docker_certs() {

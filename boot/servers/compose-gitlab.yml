@@ -1,35 +1,5 @@
 version: '2.1'
 services:
-  nexus3_init:
-    image: "sonatype/nexus3:latest"
-    user: root
-    volumes:
-      - /opt/dire/ssl:/opt/sonatype/nexus/etc/ssl
-      - /opt/dire/etc:/etc/dire
-      - ./nexus3/init_key.sh:/usr/bin/init_key.sh
-    command: bash /usr/bin/init_key.sh
-    env_file: env
-
-  nexus3:
-    image: "sonatype/nexus3:latest"
-    ports:
-      - "80:8081"
-      - "443:9443"
-    volumes:
-      - nexus3-data:/nexus-data
-      - /opt/dire/ssl:/opt/sonatype/nexus/etc/ssl
-      - ./nexus3/nexus-default.properties:/opt/sonatype/nexus/etc/nexus-default.properties:ro
-      - ./nexus3/jetty-https.xml:/opt/sonatype/nexus/etc/jetty/jetty-https.xml:ro
-    depends_on:
-      - nexus3_init
-    env_file: env
-    restart: always
-    healthcheck:
-      test: ['CMD', 'curl', '-f', 'http://localhost:8081']
-      interval: 1m30s
-      timeout: 10s
-      retries: 3
-
   gitlab:
     image: 'gitlab/gitlab-ce:latest'
     restart: always
@@ -53,7 +23,6 @@ services:
 #      - 'gitlab-runner-config:/etc/gitlab-runner'
 
 volumes:
-  nexus3-data:
   gitlab-config:
   gitlab-logs:
   gitlab-data:
