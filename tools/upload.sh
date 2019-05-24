@@ -9,11 +9,15 @@ package_dir='/opt/dire/packages/'
 ENABLE_HELM=${ENABLE_HELM:-'no'}
 ENABLE_GITLAB=${ENABLE_GITLAB:-'no'}
 
+USER=${USER:-"admin"}
+PASSWORD=${PASSWORD:-"admin123"}
+
 function upload_python_packages() {
     docker run -it --rm \
                --add-host repo.scourge.com:$HOST \
                -v /opt/dire:/opt/dire \
-               dire/package_tools twine upload -r pypi /opt/dire/packages/pypi/*
+               dire/package_tools twine upload -r pypi \
+               -u $USER -p $PASSWORD /opt/dire/packages/pypi/*
 }
 
 function trim_hostname() {
@@ -23,14 +27,14 @@ function trim_hostname() {
 function upload_rpm_packages() {
     for package in ${package_dir}rpm/*
     do
-        curl  -v --user 'admin:admin123' --upload-file $package  http://$HOST/repository/yum/
+        curl  -v --user '$USER:$PASSWORD' --upload-file $package  http://$HOST/repository/yum/
     done
 }
 
 function upload_deb_packages() {
     for file in ${package_dir}deb/*
     do
-        curl  -v --user 'admin:admin123' --upload-file $file  http://$HOST/repository/deb/
+        curl  -v --user '$USER:$PASSWORD' --upload-file $file  http://$HOST/repository/deb/
     done
 }
 
@@ -40,7 +44,7 @@ function upload_certs() {
     cp -f /opt/dire/ssl/keystore.crt  ${package_dir}certs/
     for file in /opt/dire/packages/certs/*
     do
-        curl  -v --user 'admin:admin123' --upload-file $file  http://$HOST/repository/certs/
+        curl  -v --user '$USER:$PASSWORD' --upload-file $file  http://$HOST/repository/certs/
     done
 }
 
@@ -51,13 +55,13 @@ function upload_helm() {
         fi
         for file in ${package_dir}helm/*
         do
-            curl  -v --user 'admin:admin123' --upload-file $file  http://$HOST/repository/helm/
+            curl  -v --user '$USER:$PASSWORD' --upload-file $file  http://$HOST/repository/helm/
         done
     fi
 }
 
 function push_docker_images() {
-    docker login $HOST_NAME -u admin -p admin123
+    docker login $HOST_NAME -u $USER -p $PASSWORD
     for image in ${package_dir}docker/*.tar
     do
         if [[ -f $image ]]; then
