@@ -30,7 +30,7 @@ function setup_sudo() {
 
 function setup_docker(){
     systemctl stop docker
-    rm -rf /var/lib/docker
+    rm -rf /var/lib/docker/*
     tar -zxvf /opt/dire/packages/docker.tar.gz -C /
     systemctl start docker
     setup_sudo
