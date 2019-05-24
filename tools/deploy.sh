@@ -82,7 +82,7 @@ fi
 case "$1" in
     decompress)
         decompress
-        ::
+        ;;
     initiate)
         initiate
         ;;
