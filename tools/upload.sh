@@ -6,6 +6,9 @@ source $MODULE/bootrc
 
 package_dir='/opt/dire/packages/'
 
+ENABLE_HELM=${ENABLE_HELM:-'no'}
+ENABLE_GITLAB=${ENABLE_GITLAB:-'no'}
+
 function upload_python_packages() {
     docker run -it --rm \
                --add-host repo.scourge.com:$HOST \
@@ -102,9 +105,13 @@ all)
     upload_rpm_packages
     upload_deb_packages
     upload_certs
-    upload_helm
+    if [ $ENABLE_HELM == "yes" ]; then
+        upload_helm
+    fi
     push_docker_images
-    upload_git_projects
+    if [ $ENABLE_GITLAB == "yes" ]; then
+        upload_git_projects
+    fi
     ;;
 *)
     echo "Usage upload python rpm deb certs docker all"

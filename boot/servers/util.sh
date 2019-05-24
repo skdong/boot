@@ -78,17 +78,24 @@ function down_servers() {
 }
 
 function deploy_docker_certs() {
+    echo "deploy docker ssl key"
+
     mkdir -p /etc/docker/certs.d/$HOST_NAME/
     while [ ! -f /opt/dire/ssl/keystore.crt ]
     do
-      echo 'wait for docker crt created'
+      echo 'wait for docker ssl key created'
       sleep 5
     done
+    echo "docker ssl key created"
+    echo "/opt/dire/ssl/keystore.crt"
+    echo "hostname $HOST_NAME"
+
     cp -f /opt/dire/ssl/keystore.crt /etc/docker/certs.d/$HOST_NAME/
     if [[ `grep -c "$HOST_NAME" /etc/hosts` -eq '0' ]]; then
-
         echo "$HOST $HOST_NAME" >> /etc/hosts
     fi
+
+    echo "deploy docker ssl over"
 }
 
 function clean_nexus_cert() {
