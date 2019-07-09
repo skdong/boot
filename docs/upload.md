@@ -5,8 +5,8 @@ set bootrc
 #!/usr/bin/env bash
 
 export HOST='10.0.35.21'
-export DOMAIN='.mydomain.com'
-export HOST_NAME='deploy.mydomain.com'
+export DOMAIN='.dire.com'
+export HOST_NAME='deploy.dire.com'
 ```
 
 ```bash

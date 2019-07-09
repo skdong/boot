@@ -6,6 +6,7 @@ export HOST_NAME='deploy.dire.com'
 export KEYSTORE_PASS='nexus3'
 
 export ENABLE_GITLAB='yes'
+export ENABLE_HELM='yes'
 export GIT_HOST='1.0.41.35'
 export DIRE_IP_RANGE='1.0.41.35/32'
 export DIRE_SUBNET='1.0.41.0/24'

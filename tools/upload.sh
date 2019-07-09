@@ -61,6 +61,18 @@ function upload_helm() {
     fi
 }
 
+function upload_file() {
+    if [[ -d ${package_dir}file || -f ${package_dir}file.tar.gz ]]; then
+        if [[ ! -d /opt/dire/packages/file ]]; then
+            tar -zxf ${package_dir}file.tar.gz -C ${package_dir}
+        fi
+        for file in ${package_dir}file/*
+        do
+            curl  -v --user $IDENTITY --upload-file $file  http://$HOST/repository/helm/
+        done
+    fi
+}
+
 function push_docker_images() {
     docker login $HOST_NAME -u $USER -p $PASSWORD
     for image in ${package_dir}docker/*.tar
@@ -99,6 +111,9 @@ certs)
 helm)
     upload_helm
     ;;
+file)
+    upload_file
+    ;;
 docker)
     push_docker_images
     ;;
@@ -110,6 +125,7 @@ all)
     upload_rpm_packages
     upload_deb_packages
     upload_certs
+    upload_file
     if [ $ENABLE_HELM == "yes" ]; then
         upload_helm
     fi
