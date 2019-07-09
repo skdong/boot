@@ -1,6 +1,6 @@
-deploy.mydomain.com/sonatype/nexus3:latest
-deploy.mydomain.com/gitlab/gitlab-ce:latest
-deploy.mydomain.com/gitlab/gitlab-runner:latest
-deploy.mydomain.com/ubuntu:16.04
-deploy.mydomain.com/dire/package_tools:latest
-deploy.mydomain.com/docker:dind
+deploy.dire.com/sonatype/nexus3:latest
+deploy.dire.com/gitlab/gitlab-ce:latest
+deploy.dire.com/gitlab/gitlab-runner:latest
+deploy.dire.com/ubuntu:16.04
+deploy.dire.com/dire/package_tools:latest
+deploy.dire.com/docker:dind
