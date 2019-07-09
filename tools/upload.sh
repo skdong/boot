@@ -8,6 +8,7 @@ package_dir='/opt/dire/packages/'
 
 ENABLE_HELM=${ENABLE_HELM:-'no'}
 ENABLE_GITLAB=${ENABLE_GITLAB:-'no'}
+KUBE_VERSION=${KUBE_VERSION:-'v1.14.3'}
 
 USER=${USER:-"admin"}
 PASSWORD=${PASSWORD:-"admin123"}
@@ -68,7 +69,7 @@ function upload_file() {
         fi
         for file in ${package_dir}file/*
         do
-            curl  -v --user $IDENTITY --upload-file $file  http://$HOST/repository/helm/
+            curl  -v --user $IDENTITY --upload-file $file  http://$HOST/repository/files/$KUBE_VERSION/
         done
     fi
 }

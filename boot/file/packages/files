@@ -1,4 +1,4 @@
-http://10.0.35.21/repository/files/release/v1.14.3/bin/linux/amd64/kubeadm
-http://10.0.35.21/repository/files/release/v1.14.3/bin/linux/amd64/hyperkube
-http://10.0.35.21/repository/files/calicoctl/releases/download/v3.4.4/calicoctl-linux-amd64
-http://10.0.35.21/repository/files/containernetworking/plugins/releases/download/v0.6.0/cni-plugins-amd64-v0.6.0.tgz
+http://deploy.sinnet.com.cn/repository/kubernetes-release/release/v1.14.3/bin/linux/amd64/kubeadm
+http://deploy.sinnet.com.cn/repository/kubernetes-release/release/v1.14.3/bin/linux/amd64/hyperkube
+http://deploy.sinnet.com.cn/repository/kubernetes-release/calicoctl/releases/download/v3.4.4/calicoctl-linux-amd64
+http://deploy.sinnet.com.cn/repository/kubernetes-release/containernetworking/plugins/releases/download/v0.6.0/cni-plugins-amd64-v0.6.0.tgz
