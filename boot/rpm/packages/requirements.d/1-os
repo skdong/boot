@@ -32,3 +32,9 @@ tcpdump
 iftop
 man
 bash-completion
+ca-certificates
+make
+nmap
+uuid
+python-devel
+gcc

@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-MODULES=${MODULES:="apt pypi rpm docker git helm"}
+MODULES=${MODULES:="apt pypi rpm docker git helm file"}
 CLEAN=${CLEAN:="no"}
 MODULE=$(dirname $(readlink -f $0))
 BOOT=$MODULE/../boot
@@ -16,7 +16,7 @@ function clean_container() {
 }
 
 function verify_packages() {
-    for modlue in $MODULES
+    for modlue in deb pypi rpm docker git helm file
     do
         if [[ ! -f ${PACKAGES_DIR}${modlue}_over || ! -f ${PACKAGES_DIR}${modlue}.tar.gz ]] ; then
             echo ${modlue}" is not buid over, please buid again !!!"
