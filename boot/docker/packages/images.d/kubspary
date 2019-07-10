@@ -17,8 +17,8 @@ deploy.sinnet.com.cn/google-containers/kube-proxy:v1.14.3
 deploy.sinnet.com.cn/google-containers/kube-controller-manager:v1.14.3
 deploy.sinnet.com.cn/google-containers/kube-apiserver:v1.14.3
 deploy.sinnet.com.cn/google-containers/kube-scheduler:v1.14.3
-deploy.sinnet.com.cn/google-containers/coredns:v1.14.3
-deploy.sinnet.com.cn/google-containers/pause:v1.14.3
+deploy.sinnet.com.cn/google-containers/coredns:1.3.1
+deploy.sinnet.com.cn/google-containers/pause:3.1
 
 deploy.dire.com/k8s/alertmanager:v0.15.1
 deploy.dire.com/k8s/prometheus:v2.2.1
