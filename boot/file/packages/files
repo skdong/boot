@@ -2,3 +2,5 @@ http://deploy.sinnet.com.cn/repository/kubernetes-release/release/v1.14.3/bin/li
 http://deploy.sinnet.com.cn/repository/kubernetes-release/release/v1.14.3/bin/linux/amd64/hyperkube
 http://deploy.sinnet.com.cn/repository/kubernetes-release/calicoctl/releases/download/v3.4.4/calicoctl-linux-amd64
 http://deploy.sinnet.com.cn/repository/kubernetes-release/containernetworking/plugins/releases/download/v0.6.0/cni-plugins-amd64-v0.6.0.tgz
+http://10.0.35.21/repository/files/cirros-0.3.5-x86_64-disk.img
+http://10.0.35.21/repository/files/helm-v2.13.1-linux-amd64.tar.gz

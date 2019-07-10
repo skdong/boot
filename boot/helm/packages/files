@@ -4,3 +4,15 @@ http://10.0.35.21/repository/helm/kube-prometheus-0.0.105.tgz
 http://10.0.35.21/repository/helm/prometheus-operator-0.0.29.tgz
 http://10.0.35.21/repository/helm/gitlab-ce-0.2.2.tgz
 http://10.0.35.21/repository/helm/sonatype-nexus-1.15.0.tgz
+http://10.0.35.21/repository/helm/cinder-0.1.0.tgz
+http://10.0.35.21/repository/helm/glance-0.1.0.tgz
+http://10.0.35.21/repository/helm/helm-toolkit-0.1.0.tgz
+http://10.0.35.21/repository/helm/ingress-0.1.0.tgz
+http://10.0.35.21/repository/helm/keystone-0.1.0.tgz
+http://10.0.35.21/repository/helm/libvirt-0.1.0.tgz
+http://10.0.35.21/repository/helm/mariadb-0.1.0.tgz
+http://10.0.35.21/repository/helm/memcached-0.1.0.tgz
+http://10.0.35.21/repository/helm/neutron-0.1.0.tgz
+http://10.0.35.21/repository/helm/nova-0.1.0.tgz
+http://10.0.35.21/repository/helm/openvswitch-0.1.0.tgz
+http://10.0.35.21/repository/helm/rabbitmq-0.1.0.tgz
