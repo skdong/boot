@@ -12,6 +12,7 @@ packages_list=${basedir}${type}'/requirements.d/'
 
 function download_packages() {
     apt-get update -y
+    apt install -y apt-utils
 
     apt-get -y --download-only dist-upgrade
 
@@ -66,7 +67,6 @@ function clean() {
 function init_work_space() {
     clean
     mkdir -p ${worke_space}
-    apt install -y apt-utils
 }
 
 function set_build_over {
