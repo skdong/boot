@@ -1,4 +1,4 @@
-ansible>=2.4.0
+ansible==2.7.8
 pbr>=1.6
 ansible-modules-hashivault>=3.9.4
 hvac
@@ -12,3 +12,5 @@ PyYAML>=3.12 # MIT
 netaddr>=0.7.18 # BSD
 cryptography>=2.1 # BSD/Apache-2.0
 python-gitlab
+jmespath
+ruamel.yaml

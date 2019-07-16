@@ -1,6 +1,6 @@
-deploy.mydomain.com/ceph/ubuntu-source-heat-engine:3.0.3
-deploy.mydomain.com/ceph/daemon:tag-build-master-luminous-ubuntu-16.04
-deploy.mydomain.com/ceph/ubuntu-source-kubernetes-entrypoint:4.0.0
-deploy.mydomain.com/ceph/ceph-config-helper:v1.7.5
-deploy.mydomain.com/ceph/rbd-provisioner:v0.1.1
-deploy.mydomain.com/ceph/alpine:latest
+deploy.dire.com/ceph/ubuntu-source-heat-engine:3.0.3
+deploy.dire.com/ceph/daemon:tag-build-master-luminous-ubuntu-16.04
+deploy.dire.com/ceph/ubuntu-source-kubernetes-entrypoint:4.0.0
+deploy.dire.com/ceph/ceph-config-helper:v1.7.5
+deploy.dire.com/ceph/rbd-provisioner:v0.1.1
+deploy.dire.com/ceph/alpine:latest
