@@ -66,6 +66,7 @@ function clean() {
 function init_work_space() {
     clean
     mkdir -p ${worke_space}
+    apt install -y apt-utils
 }
 
 function set_build_over {
