@@ -10,16 +10,16 @@ ENABLE_HELM=${ENABLE_HELM:-'no'}
 ENABLE_GITLAB=${ENABLE_GITLAB:-'no'}
 KUBE_VERSION=${KUBE_VERSION:-'v1.14.3'}
 
-USER=${USER:-"admin"}
-PASSWORD=${PASSWORD:-"admin123"}
-IDENTITY="$USER:$PASSWORD"
+NEXUS_USER=${NEXUS_USER:-"admin"}
+NEXUS_PASSWORD=${NEXUS_PASSWORD:-"admin123"}
+IDENTITY="$NEXUS_USER:$NEXUS_PASSWORD"
 
 function upload_python_packages() {
     docker run -it --rm \
                --add-host repo.scourge.com:$HOST \
                -v /opt/dire:/opt/dire \
                dire/package_tools twine upload -r pypi \
-               -u $USER -p $PASSWORD /opt/dire/packages/pypi/*
+               -u $NEXUS_USER -p $NEXUS_PASSWORD /opt/dire/packages/pypi/*
 }
 
 function trim_hostname() {
@@ -75,7 +75,7 @@ function upload_file() {
 }
 
 function push_docker_images() {
-    docker login $HOST_NAME -u $USER -p $PASSWORD
+    docker login $HOST_NAME -u $NEXUS_USER -p $NEXUS_PASSWORD
     for image in ${package_dir}docker/*.tar
     do
         if [[ -f $image ]]; then
